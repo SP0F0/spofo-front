@@ -140,7 +140,6 @@ jobs:
           host: ${{ secrets.AWS_SSH_HOST }}
           username: ${{ secrets.AWS_SSH_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          port: ${{ secrets.AWS_SSH_PORT }}
           # 스크립트 중간에 실패하면 다음 스크립트를 실행하지 않는 옵션 true로 주기
           script_stop: true
           script: |
