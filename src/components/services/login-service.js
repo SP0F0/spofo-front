@@ -1,7 +1,6 @@
 import axios from '../common/axios-config';
-import { useCookies } from 'vue3-cookies';
-
-const { cookies } = useCookies();
+import loginStore from '@/stores/login-store';
+import { Member } from '@/components/models/member';
 
 class LoginService {
   doLoginProcess(socialType, code) {
@@ -10,8 +9,12 @@ class LoginService {
     return axios
       .get(requestUrl)
       .then((response) => response.data.id_token)
-      .then((idToken) => {
-        this.addMember(socialType, idToken).then(() => this.storeLoginInfo(socialType, idToken));
+      .then(async (idToken) => {
+        const payload = (await import('@/components/services/jwt-decoder')).default.decode(idToken);
+
+        this.addMember(socialType, payload).then(() =>
+          this.storeLoginInfo(socialType, idToken, payload)
+        );
       });
   }
 
@@ -25,17 +28,20 @@ class LoginService {
     return `${kakaoAuthRequestUrl}/token?grant_type=${grantType}&client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&code=${code}`;
   }
 
-  addMember(socialType, idToken) {
-    //return axios.post('인증서버 url', { socialType: socialType, idToken: idToken });
-    return new Promise((resolve) => {
-      console.log(`나중에 인증서버 요청으로 변경하기`);
-      resolve();
+  async addMember(socialType, payload) {
+    const authService = (await import('./auth-service')).default;
+    authService.addMember({
+      socialType: socialType,
+      id: payload.sub
     });
   }
 
-  storeLoginInfo(socialType, idToken) {
-    cookies.set('socialType', socialType, 60 * 60 * 24 * 7);
-    cookies.set('authorization', idToken, 60 * 60 * 24 * 7);
+  storeLoginInfo(socialType, idToken, payload) {
+    const useLoginStore = loginStore();
+
+    localStorage.setItem('socialType', socialType);
+    localStorage.setItem('authorization', idToken);
+    useLoginStore.login(new Member(payload.nickname, payload.picture));
   }
 }
 
