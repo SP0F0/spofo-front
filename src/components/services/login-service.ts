@@ -1,9 +1,9 @@
 import axios from '../common/axios-config';
-import loginStore from '@/stores/login-store';
+import { loginStore } from '@/stores/login-store';
 import { Member } from '@/components/models/member';
 
 class LoginService {
-  doLoginProcess(socialType, code) {
+  doLoginProcess(socialType: string, code: string) {
     const requestUrl = this.getTokenRequestUrl(socialType, code);
 
     return axios
@@ -18,7 +18,7 @@ class LoginService {
       });
   }
 
-  getTokenRequestUrl(socialType, code) {
+  getTokenRequestUrl(socialType: string, code: string) {
     // 카카오
     const kakaoAuthRequestUrl = import.meta.env.VITE_KAKAO_AUTH_REQUEST_URL;
     const kakaoClientId = import.meta.env.VITE_KAKAO_CLIENT_ID;
@@ -28,7 +28,7 @@ class LoginService {
     return `${kakaoAuthRequestUrl}/token?grant_type=${grantType}&client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&code=${code}`;
   }
 
-  async addMember(socialType, payload) {
+  async addMember(socialType: string, payload: any) {
     const authService = (await import('./auth-service')).default;
     authService.addMember({
       socialType: socialType,
@@ -36,7 +36,7 @@ class LoginService {
     });
   }
 
-  storeLoginInfo(socialType, idToken, payload) {
+  storeLoginInfo(socialType: string, idToken: string, payload: any) {
     const useLoginStore = loginStore();
 
     localStorage.setItem('socialType', socialType);

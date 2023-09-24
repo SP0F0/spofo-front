@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const kakaLogin = () => {
   // 카카오
   const kakaoAuthRequestUrl = import.meta.env.VITE_KAKAO_AUTH_REQUEST_URL;

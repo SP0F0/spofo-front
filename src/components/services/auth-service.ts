@@ -4,7 +4,7 @@ class AuthService {
   authServer = import.meta.env.VITE_AUTH_SERVER;
 
   // API 연결 필요
-  addMember(loggedInMemberInfo) {
+  addMember(loggedInMemberInfo: any) {
     axios
       .put(this.authServer + '/auth/members', loggedInMemberInfo)
       .then((response) => console.log(response));

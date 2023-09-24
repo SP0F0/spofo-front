@@ -1,10 +1,10 @@
 class JwtDecoder {
   authServer = import.meta.env.VITE_AUTH_SERVER;
 
-  decode(token) {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    let jsonPayload = decodeURIComponent(
+  decode(token: string) {
+    const base64Url: string = token.split('.')[1];
+    const base64: string = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload: string = decodeURIComponent(
       window
         .atob(base64)
         .split('')
