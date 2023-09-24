@@ -26,6 +26,16 @@ const router = createRouter({
           .then(() => next('/'))
           .catch((error) => console.log(error));
       }
+    },
+    {
+      path: '/my/portfolios',
+      name: 'portfolios',
+      component: () => import('../views/Portfolios.vue')
+    },
+    {
+      path: '/my/portfolio',
+      name: 'portfolio',
+      component: () => import('../views/Portfolio.vue')
     }
   ]
 });
