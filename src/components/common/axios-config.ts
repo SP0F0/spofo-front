@@ -11,15 +11,16 @@ const instance = axios.create();
 //const router = useRouter();
 
 // 요청 인터셉터 추가하기
-/*
 instance.interceptors.request.use(
   function (config) {
     // 요청이 전달되기 전에 작업 수행
-    const accessToken = localStorage.getItem('accessToken') || '';
+    const idToken = localStorage.getItem('authorization') || '';
 
-    if (accessToken != null && config.headers != null) {
-      config.headers['Authorization'] = 'Bearer ' + accessToken;
+    if (idToken != null && config.headers != null) {
+      config.headers['authorization'] = 'Bearer ' + idToken;
+      config.headers['socialType'] = localStorage.getItem('socialType') || '';
     }
+
     return config;
   },
   function (error) {
@@ -28,6 +29,7 @@ instance.interceptors.request.use(
   }
 );
 
+/*
 // 응답(response) interceptor
 instance.interceptors.response.use(
   function (response) {
