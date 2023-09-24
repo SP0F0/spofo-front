@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-  padding: 1.5rem;
+  padding: 0.7rem;
   background-color: #DBE2EF;
   font-size: 1.1rem;
 }
@@ -14,6 +14,12 @@ body {
 .header .el-link__inner {
   color: #112D4E !important;
   font-size: 1.1rem;
+}
+
+.header-content {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
 }
 
 .main-container {
