@@ -1,5 +1,4 @@
 import axios from '../common/axios-config';
-import { PortfoliosSummary } from '@/components/models/portfolios-summary';
 
 class PortfolioService {
   portfolioServer = import.meta.env.VITE_PORTFOLIO_SERVER;
@@ -10,6 +9,10 @@ class PortfolioService {
 
   getPortfolioSimples() {
     return axios.get(this.portfolioServer + '/portfolios');
+  }
+
+  createPortfolio(portfolio: any) {
+    return axios.post(this.portfolioServer + '/portfolios', portfolio);
   }
 }
 
