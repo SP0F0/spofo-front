@@ -6,7 +6,7 @@ class AuthService {
   // API 연결 필요
   addMember(loggedInMemberInfo: any) {
     axios
-      .put(this.authServer + '/auth/members', loggedInMemberInfo)
+      .put(this.authServer + '/auth/members/search', loggedInMemberInfo)
       .then((response) => console.log(response));
   }
 }
