@@ -1,6 +1,5 @@
 import axios from 'axios';
 import commonUtils from '@/components/common/common-utils';
-import UrlPattern from 'url-pattern';
 
 //import { useRouter } from 'vue-router';
 
