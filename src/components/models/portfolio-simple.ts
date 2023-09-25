@@ -1,16 +1,16 @@
 class PortfolioSimple {
   id: string;
   name: string;
-  gain: string;
-  gainRate: string;
+  gain: number;
+  gainRate: number;
   tag: string;
   includeYn: string;
 
   constructor(
     id: string,
     name: string,
-    gain: string,
-    gainRate: string,
+    gain: number,
+    gainRate: number,
     tag: string,
     includeYn: string
   ) {
