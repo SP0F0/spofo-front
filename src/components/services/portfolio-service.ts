@@ -1,11 +1,15 @@
 import axios from '../common/axios-config';
+import { PortfoliosSummary } from '@/components/models/portfolios-summary';
 
 class PortfolioService {
   portfolioServer = import.meta.env.VITE_PORTFOLIO_SERVER;
 
-  testCall() {
-    console.log('포트폴리오 서버 테스트 API 호출');
-    axios.get(this.portfolioServer + '/test').then((response) => console.log(response));
+  getPortfoliosTotal() {
+    return axios.get(this.portfolioServer + '/portfolios/total');
+  }
+
+  getPortfolioSimples() {
+    return axios.get(this.portfolioServer + '/portfolios');
   }
 }
 
