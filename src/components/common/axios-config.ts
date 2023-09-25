@@ -1,4 +1,7 @@
 import axios from 'axios';
+import commonUtils from '@/components/common/common-utils';
+import UrlPattern from 'url-pattern';
+
 //import { useRouter } from 'vue-router';
 
 /*
@@ -8,17 +11,21 @@ import axios from 'axios';
 */
 
 const instance = axios.create();
+const needsAuthPatterns: string[] = [import.meta.env.VITE_PORTFOLIO_SERVER];
+
 //const router = useRouter();
 
 // 요청 인터셉터 추가하기
 instance.interceptors.request.use(
   function (config) {
     // 요청이 전달되기 전에 작업 수행
-    const idToken = localStorage.getItem('authorization') || '';
+    if (commonUtils.urlMatcher(needsAuthPatterns, config.url!)) {
+      const idToken = localStorage.getItem('authorization') || '';
 
-    if (idToken != null && config.headers != null) {
-      config.headers['authorization'] = 'Bearer ' + idToken;
-      config.headers['socialType'] = localStorage.getItem('socialType') || '';
+      if (idToken != null && config.headers != null) {
+        config.headers['authorization'] = 'Bearer ' + idToken;
+        config.headers['socialType'] = localStorage.getItem('socialType') || '';
+      }
     }
 
     return config;
