@@ -47,7 +47,13 @@ onMounted(async () => {
               <el-col :span="1">
                 <div class="text item">
                   <el-button type="info" circle link size="large">
-                    <el-icon size="30" color="#000"><Plus /></el-icon>
+                    <el-icon
+                      size="30"
+                      color="#000"
+                      @click="router.push({ name: 'portfolioCreate' })"
+                    >
+                      <Plus />
+                    </el-icon>
                   </el-button>
                 </div>
               </el-col>

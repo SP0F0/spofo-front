@@ -25,4 +25,4 @@ import portfolioService from '../components/services/portfolio-service';
   </div>
 </template>
 
-<style scoped></style>
+<style></style>

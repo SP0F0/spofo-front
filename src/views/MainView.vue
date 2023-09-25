@@ -20,9 +20,4 @@ const router = useRouter();
   </div>
 </template>
 
-<style>
-.el-row {
-  margin-bottom: 20px;
-  height: inherit;
-}
-</style>
+<style></style>
