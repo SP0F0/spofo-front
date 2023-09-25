@@ -1,0 +1,71 @@
+body {
+  /* 구글 웹 폰트 적용 */
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #112D4E !important;
+  margin: 0px;
+}
+
+.header {
+  padding: 0.7rem;
+  background-color: #DBE2EF;
+  font-size: 1.1rem;
+}
+
+.header .el-link__inner {
+  color: #112D4E !important;
+  font-size: 1.1rem;
+}
+
+.header-content {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.main-container {
+  margin: auto;
+  width: 90vw;
+  text-align: center;
+}
+
+.main-container .login-btn {
+  width: 50%;
+  height: 5rem !important;
+  font-size: 2.5rem !important;
+}
+
+.login .button-container {
+  width: 30rem;
+  margin: auto;
+}
+
+.login .button-container img {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 1rem;
+  border-radius: 50%;
+}
+
+.login .login-btn {
+  width: 100%;
+  height: 4rem !important;
+  font-size: 1.5rem !important;
+  margin-bottom: 2rem;
+}
+
+.txt-left {
+  text-align: left;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.p-1 {
+  padding: 1rem;
+}

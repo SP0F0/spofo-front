@@ -22,7 +22,7 @@ const router = createRouter({
       meta: { isLoginProcess: true, socialType: 'KAKAO' },
       beforeEnter: (to, from, next) => {
         loginService
-          .doLoginProcess(to.meta.socialType, to.query.code)
+          .doLoginProcess(to.meta.socialType as string, to.query.code as string)
           .then(() => next('/'))
           .catch((error) => console.log(error));
       }
