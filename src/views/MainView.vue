@@ -13,16 +13,11 @@ const router = useRouter();
     <el-row :gutter="24">
       <el-col>
         <el-button class="login-btn" color="#DBE2EF" round @click="router.push({ name: 'login' })">
-          로그인
+          시작하기
         </el-button>
       </el-col>
     </el-row>
   </div>
 </template>
 
-<style>
-.el-row {
-  margin-bottom: 20px;
-  height: inherit;
-}
-</style>
+<style></style>

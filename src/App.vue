@@ -35,7 +35,7 @@ function showClick() {
     </el-col>
     <el-col :span="4" class="header-content">
       <div class="grid-content ep-bg-purple-light" />
-      <el-link :underline="false" @click="portfolio">포트폴리오</el-link>
+      <el-link :underline="false" @click="router.push({ name: 'portfolios' })">포트폴리오</el-link>
     </el-col>
     <el-col :span="4" class="header-content"><div class="grid-content ep-bg-purple" /> </el-col>
     <el-col :span="4" class="header-content"><div class="grid-content ep-bg-purple" /> </el-col>
@@ -61,5 +61,7 @@ function showClick() {
       <el-link :underline="false" @click="router.push({ name: 'login' })">로그인</el-link>
     </el-col>
   </el-row>
-  <RouterView />
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
