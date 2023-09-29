@@ -8,9 +8,11 @@ const kakaLogin = () => {
   window.location.href = `${kakaoAuthRequestUrl}/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code&scope=openid`;
 };
 
+/*
 const naverLogin = () => {};
 
 const googleLogin = () => {};
+ */
 </script>
 
 <template>
@@ -25,6 +27,7 @@ const googleLogin = () => {};
           </el-button>
         </el-col>
       </el-row>
+      <!--
       <el-row justify="center">
         <el-col :span="24">
           <el-button class="login-btn" color="#1EC800" round @click="naverLogin">
@@ -41,6 +44,7 @@ const googleLogin = () => {};
           </el-button>
         </el-col>
       </el-row>
+      -->
     </div>
   </div>
 </template>
