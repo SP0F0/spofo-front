@@ -67,35 +67,42 @@ body {
   margin-bottom: 2rem;
 }
 
-.portfolios-summary-container .box-card, .portfolio-create-container .box-card {
+.portfolios-summary-container .box-card, .portfolio-create-container .box-card,
+.portfolio-summary-container .box-card, .portfolio-create-container .box-card {
   width: 80%;
   margin: 5rem auto;
   border-radius: 1rem;
   background-color: #F9F7F7;
 }
 
-.portfolios-summary-container .card-header {
+.portfolios-summary-container .card-header,
+.portfolio-summary-container .card-header {
   padding: 1rem;
 }
 
-.portfolios-summary-container .card-body, .portfolio-create-container .card-body {
+.portfolios-summary-container .card-body, .portfolio-create-container .card-body,
+.portfolio-summary-container .card-body, .portfolio-create-container .card-body {
   padding: 1rem;
 }
 
 .portfolios-summary-container .card-body .card-body-header,
+.portfolio-summary-container .card-body .card-body-header,
 .portfolio-create-container .card-body .card-body-header {
   padding: 1rem;
 }
 
-.portfolios-summary-container .card-body .el-row {
+.portfolios-summary-container .card-body .el-row,
+.portfolio-summary-container .card-body .el-row {
   margin-bottom: 2rem;
 }
 
-.portfolios-summary-container .card-body .el-col {
+.portfolios-summary-container .card-body .el-col,
+.portfolio-summary-container .card-body .el-col {
   padding: 1rem;
 }
 
-.portfolios-summary-container .card-body .stock-card {
+.portfolios-summary-container .card-body .stock-card,
+.portfolio-summary-container .card-body .stock-card {
   background-color: #DBE2EF;
   border: 1px solid;
   border-radius: 0.5rem;
@@ -103,48 +110,67 @@ body {
   padding: 0.7rem;
 }
 
-.portfolios-summary-container .card-body .stock-card .stock-card-content {
+.portfolios-summary-container .card-body .stock-card .stock-card-content,
+.portfolio-summary-container .card-body .stock-card .stock-card-content {
   margin-bottom: 0.5rem;
   padding: 0.5rem;
 }
 
-.portfolios-summary-container .f-big {
+.portfolios-summary-container .f-big,
+.portfolio-summary-container .f-big {
   font-size: 2rem;
 }
 
-.portfolios-summary-container .f-small {
+.portfolios-summary-container .f-small,
+.portfolio-summary-container .f-small {
   font-size: 1.3rem;
 }
 
-.portfolio-create-container .card-header  {
+.portfolio-create-container .card-header,
+.portfolio-summary-container .card-header {
   font-size: 1.5rem;
   text-align: center;
   padding: 1rem;
 }
 
-.portfolio-create-container .card-body .el-form-item {
+.portfolio-create-container .card-body .el-form-item,
+.portfolio-summary-container .card-body .el-form-item {
   padding: 1rem;
 }
 
-.portfolio-create-container .box-card .radio-btn {
+.portfolio-create-container .box-card .radio-btn,
+.portfolio-summary-container .box-card .radio-btn {
   margin-right: 1rem;
 }
 
-.portfolio-create-container .box-card .radio-btn .el-radio-button__inner {
+.portfolio-create-container .box-card .radio-btn .el-radio-button__inner,
+.portfolio-summary-container .box-card .radio-btn .el-radio-button__inner {
   border-left-width: 1px !important;
   border-left-style: solid;
   border-left-color: #dcdfe6;
   border-radius: 2rem !important;
 }
 
-.portfolio-create-container .button-container .el-form-item__content {
+.portfolio-create-container .button-container .el-form-item__content,
+.portfolio-summary-container .button-container .el-form-item__content {
   justify-content: center;
 }
 
-.portfolio-create-container .button-container .el-button  {
+.portfolio-create-container .button-container .el-button,
+.portfolio-summary-container .button-container .el-button  {
   width: 40%;
   height: 3rem;
   font-size: 1.5rem;
+}
+
+.el-dialog, .el-message-box {
+  border-radius: 2rem !important;
+  background-color: #DBE2EF !important;
+}
+
+.popup .el-input__wrapper,
+.popup .el-textarea__inner {
+  border-radius: 0.5rem;
 }
 
 .tag {
