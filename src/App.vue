@@ -13,15 +13,7 @@ const logout = function () {
   router.push({ name: 'main' });
 };
 
-const portfolio = () => {
-  alert('포트폴리오 메뉴 준비중입니다.');
-};
-
-const test = () => {
-  alert('토글메뉴~');
-};
-
-function showClick() {
+function showDropdown() {
   if (!memberDropdown.value) return;
   memberDropdown.value.handleOpen();
 }
@@ -45,7 +37,9 @@ function showClick() {
     <el-col class="header-content" :span="4" v-if="useLoginStore.isAuthedMember">
       <el-dropdown ref="memberDropdown" trigger="contextmenu" size="large">
         <span class="el-dropdown-link">
-          <el-avatar :size="50" :src="useLoginStore.getMember.imagePath" @click="showClick" />
+          <el-link :underline="false" @click="showDropdown">
+            <el-avatar :size="50" :src="useLoginStore.getMember.imagePath" />
+          </el-link>
         </span>
         <template #dropdown>
           <el-dropdown-menu>

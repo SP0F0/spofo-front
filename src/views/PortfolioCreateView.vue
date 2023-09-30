@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import portfolioService from '@/components/services/portfolio-service';
+import { focusOn } from '@/components/common/utils';
 
+const portfolioNameRef = ref<HTMLElement>();
 const portfolioForm = ref({
   name: '',
   description: '',
@@ -9,12 +11,14 @@ const portfolioForm = ref({
   type: 'REAL'
 });
 
-function createPortfolio() {
+onMounted(() => focusOn(portfolioNameRef.value));
+
+const createPortfolio = () => {
   portfolioService
     .createPortfolio(portfolioForm.value)
     .then((response) => response.data.portfolioId)
     .catch((error) => console.log(error));
-}
+};
 </script>
 
 <template>
@@ -24,12 +28,20 @@ function createPortfolio() {
         <el-card class="box-card" shadow="never">
           <div class="card-header">포트폴리오 신규 추가</div>
           <div class="card-body">
-            <el-form ref="formRef" :model="portfolioForm" label-width="auto">
+            <el-form ref="formRef" :model="portfolioForm" label-width="auto" label-position="top">
               <el-form-item label="포트폴리오 이름" prop="name">
-                <el-input v-model="portfolioForm.name" />
+                <el-input
+                  v-model="portfolioForm.name"
+                  placeholder="포트폴리오 이름을 입력해 주세요."
+                  ref="portfolioNameRef"
+                />
               </el-form-item>
               <el-form-item label="포트폴리오 설명" prop="description">
-                <el-input v-model="portfolioForm.description" type="textarea" />
+                <el-input
+                  v-model="portfolioForm.description"
+                  type="textarea"
+                  placeholder="포트폴리오 설명을 입력해 주세요."
+                />
               </el-form-item>
               <el-form-item label="기준통화" prop="currency">
                 <el-radio-group v-model="portfolioForm.currency" text-color="#FFF" fill="#3F72AF">

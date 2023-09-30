@@ -179,7 +179,7 @@ const confirmDeleteStock = (stockName: string) => {
             <div class="stock-card">
               <el-row class="stock-card-content" align="middle">
                 <el-col :span="4">
-                  <el-avatar :size="60" />
+                  <el-avatar :size="45" />
                 </el-col>
                 <el-col :span="16"> 삼성전자 <span>기술주</span> </el-col>
                 <el-col :span="4"> 수량 10 </el-col>
