@@ -1,4 +1,7 @@
 import axios from '../common/axios-config';
+import type { PortfolioCreate } from '@/components/models/portfolio-create';
+import type { PortfolioModify } from '@/components/models/portfolio-modify';
+import type { StockCreate } from '@/components/models/stock-create';
 
 class PortfolioService {
   portfolioServer = import.meta.env.VITE_PORTFOLIO_SERVER;
@@ -16,17 +19,34 @@ class PortfolioService {
   }
 
   getPortfolioTotal(portfolioId: number) {
-    alert('getPortfolioTotal');
     return axios.get(this.portfolioServer + `/portfolios/${portfolioId}/total`);
   }
 
   getPortfolioStocks(portfolioId: number) {
-    alert('getPortfolioStocks');
     return axios.get(this.portfolioServer + `/portfolios/${portfolioId}/stocks`);
   }
 
-  createPortfolio(portfolio: any) {
+  createPortfolio(portfolio: PortfolioCreate) {
     return axios.post(this.portfolioServer + '/portfolios', portfolio);
+  }
+
+  modifyPortfolio(portfolio: PortfolioModify) {
+    return axios.put(this.portfolioServer + `/portfolios/${portfolio.id}`, portfolio);
+  }
+
+  createStock(portfolioId: number, stockCode: string, stock: StockCreate) {
+    return axios.post(
+      this.portfolioServer + `/portfolios/${portfolioId}/stocks/${stockCode}`,
+      stock
+    );
+  }
+
+  deletePortfolio(portfolioId: number) {
+    return axios.delete(this.portfolioServer + `/portfolios/${portfolioId}`);
+  }
+
+  deleteStock(portfolioId: number, stockId: number) {
+    return axios.delete(this.portfolioServer + `/portfolios/${portfolioId}/stocks/${stockId}`);
   }
 }
 
