@@ -85,7 +85,7 @@ const createPortfolio = () => {
                   color="#112D4E"
                   round
                   @click="createPortfolio"
-                  :disabled="portfolioCreateForm.name?.trim() === '' ? true : false"
+                  :disabled="!portfolioCreateForm.name"
                 >
                   생성하기
                 </el-button>
