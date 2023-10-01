@@ -1,24 +1,13 @@
 import axios from 'axios';
-import commonUtils from '@/components/common/common-utils';
-
-//import { useRouter } from 'vue-router';
-
-/*
-    vue3의 ts파일에서 vue router를 사용하기
-    1. 파일명에 카멜표기법을 사용하지 않고 ts 파일로 인식하게 한다.
-    2. 위와 같이 router를 import하여 활용한다.
-*/
+import UrlPattern from 'url-pattern';
 
 const instance = axios.create();
-const needsAuthPatterns: string[] = [import.meta.env.VITE_PORTFOLIO_SERVER];
+const pattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(\\::port)(/*)');
+const needsAuthDomain = ['portfolio', 'auth'];
 
-//const router = useRouter();
-
-// 요청 인터셉터 추가하기
 instance.interceptors.request.use(
   function (config) {
-    // 요청이 전달되기 전에 작업 수행
-    if (commonUtils.urlMatcher(needsAuthPatterns, config.url!)) {
+    if (needsAuthDomain.includes(pattern.match(config.url!).subdomain, 0)) {
       const idToken = localStorage.getItem('authorization') || '';
 
       if (idToken != null && config.headers != null) {
