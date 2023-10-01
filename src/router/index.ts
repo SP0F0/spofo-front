@@ -13,7 +13,10 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue')
+      component: () => import('@/views/LoginView.vue'),
+      meta: {
+        title: 'SPOFO 로그인'
+      }
     },
     {
       path: '/kakao',
@@ -39,26 +42,41 @@ const router = createRouter({
     {
       path: '/my/portfolios',
       name: 'portfolios',
-      component: () => import('@/views/PortfoliosView.vue')
+      component: () => import('@/views/PortfoliosView.vue'),
+      meta: {
+        title: 'SPOFO 포트폴리오 관리'
+      }
     },
     {
       path: '/my/portfolio',
       name: 'portfolio',
-      component: () => import('@/views/PortfolioView.vue')
+      component: () => import('@/views/PortfolioView.vue'),
+      meta: {
+        title: 'SPOFO 포트폴리오 관리'
+      }
     },
     {
       path: '/my/portfolio/create/selection',
       name: 'portfolioCreateSelection',
-      component: () => import('@/views/PortfolioCreateSelectionView.vue')
+      component: () => import('@/views/PortfolioCreateSelectionView.vue'),
+      meta: {
+        title: 'SPOFO 포트폴리오 추가'
+      }
     },
     {
       path: '/my/portfolio/create',
       name: 'portfolioCreate',
-      component: () => import('@/views/PortfolioCreateView.vue')
+      component: () => import('@/views/PortfolioCreateView.vue'),
+      meta: {
+        title: 'SPOFO 포트폴리오 추가'
+      }
     }
   ]
 });
 
 //router.beforeEach(function (to, from, next) {});
 
+router.afterEach((to, from) => {
+  document.title = to.meta.title === undefined ? 'SPOFO' : (to.meta.title as string);
+});
 export default router;
