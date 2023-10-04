@@ -27,6 +27,8 @@ export const loginStore = defineStore('login', {
     logout(): void {
       this.isAuthed = false;
       this.member = new Member('', '');
+      localStorage.removeItem('authorization');
+      localStorage.removeItem('socialType');
     },
     isStoredMember(): boolean {
       return this.isAuthed;

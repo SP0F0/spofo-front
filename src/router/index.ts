@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import loginService from '../components/services/login-service';
 import { ElNotification } from 'element-plus';
+import UrlPattern from 'url-pattern';
+import authService from '@/components/services/auth-service';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,9 +76,41 @@ const router = createRouter({
   ]
 });
 
-//router.beforeEach(function (to, from, next) {});
+router.beforeEach(function (to, from, next) {
+  const pattern = new UrlPattern('/my/*');
+
+  if (pattern.match(to.path)) {
+    // authServer에 요청 후 처리
+    const idToken = localStorage.getItem('authorization') || '';
+
+    if (idToken) {
+      authService
+        .verifyToken()
+        .then(() => next())
+        .catch((error) => {
+          needsLoginMessage();
+          next('login');
+        });
+    } else {
+      needsLoginMessage();
+      next('login');
+    }
+  } else {
+    next();
+  }
+});
 
 router.afterEach((to, from) => {
   document.title = to.meta.title === undefined ? 'SPOFO' : (to.meta.title as string);
 });
+
+const needsLoginMessage = () => {
+  ElNotification({
+    title: '알림',
+    message: '다시 로그인이 필요합니다.',
+    position: 'bottom-left',
+    type: 'error'
+  });
+};
+
 export default router;
