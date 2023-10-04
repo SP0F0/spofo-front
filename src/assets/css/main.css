@@ -110,6 +110,7 @@ body {
 .portfolio-create-container .card-body .card-body-header,
 .create-stock-container .card-body .card-body-header {
   padding: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .portfolios-summary-container .card-body .el-row,
