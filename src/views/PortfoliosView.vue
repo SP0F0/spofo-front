@@ -124,7 +124,7 @@ const changeFilterOption = () => {
                 <span class="f-small">평가수익</span>
               </el-col>
               <el-col :span="4">
-                <span class="f-small">₩{{ portfoliosSummary?.gain }}</span>
+                <span class="f-small txt-right">₩{{ portfoliosSummary?.gain }}</span>
               </el-col>
             </el-row>
             <el-row>
@@ -132,7 +132,7 @@ const changeFilterOption = () => {
                 <span class="f-small">수익률</span>
               </el-col>
               <el-col :span="4">
-                <span class="f-small">{{ portfoliosSummary?.gainRate }}%</span>
+                <span class="f-small txt-right">{{ portfoliosSummary?.gainRate }}%</span>
               </el-col>
             </el-row>
             <el-row>
@@ -140,7 +140,7 @@ const changeFilterOption = () => {
                 <span class="f-small">일간 수익률</span>
               </el-col>
               <el-col :span="4">
-                <span class="f-small">{{ portfoliosSummary?.dailyGainRate }}%</span>
+                <span class="f-small txt-right">{{ portfoliosSummary?.dailyGainRate }}%</span>
               </el-col>
             </el-row>
           </div>

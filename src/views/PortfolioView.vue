@@ -226,48 +226,40 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
             </el-row>
           </div>
           <div class="card-body">
-            <el-row align="middle">
-              <el-col :span="20"
-                ><span class="f-big">{{ portfolioSummary.name }}</span></el-col
-              >
-              <el-col :span="4">
-                <PortfolioTag v-if="portfolioSummary.tag" :tag="portfolioSummary.tag" />
+            <div class="card-body-header">
+              <el-row align="middle">
+                <el-col :span="20">
+                  <span class="f-big">{{ portfolioSummary.name }}</span>
+                </el-col>
+                <el-col :span="4">
+                  <PortfolioTag v-if="portfolioSummary.tag" :tag="portfolioSummary.tag" />
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <span class="f-small">
+                    <strong>{{ portfolioSummary.detail }}</strong>
+                  </span>
+                </el-col>
+              </el-row>
+            </div>
+            <el-row>
+              <el-col :span="16"><span class="f-small">총 자산</span></el-col>
+              <el-col :span="8" class="txt-right">
+                <span class="f-small"> ₩{{ portfolioSummary.totalAsset }} </span>
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="24">
+              <el-col :span="16"><span class="f-small">총 매수 금액</span></el-col>
+              <el-col :span="8" class="txt-right">
+                <span class="f-small"> ₩{{ portfolioSummary.totalBuy }} </span>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="16"><span class="f-small">평가 수익</span></el-col>
+              <el-col :span="8" class="txt-right">
                 <span class="f-small">
-                  <strong>{{ portfolioSummary.detail }}</strong>
-                </span>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24"><span class="f-small">총 자산</span></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24">
-                <span class="f-big">
-                  <strong>₩{{ portfolioSummary.totalAsset }}</strong>
-                </span>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24"><span class="f-small">총 매수 금액</span></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24">
-                <span class="f-big">
-                  <strong>₩{{ portfolioSummary.totalBuy }}</strong>
-                </span>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24"><span class="f-small">평가 수익</span></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24">
-                <span class="f-big">
-                  <strong>₩{{ portfolioSummary.gain }} ({{ portfolioSummary.gainRate }}%)</strong>
+                  ₩{{ portfolioSummary.gain }} ({{ portfolioSummary.gainRate }}%)
                 </span>
               </el-col>
             </el-row>

@@ -1,24 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { Plus, Setting, Delete, EditPen, Search } from '@element-plus/icons-vue';
-import { ElMessageBox, ElNotification, FormInstance } from 'element-plus';
-import PortfolioModifyView from '@/views/PortfolioModifyView.vue';
-import AddStockView from '@/views/AddStockView.vue';
-import portfolioService from '@/components/services/portfolio-service';
+import { Search } from '@element-plus/icons-vue';
+import { ElNotification, FormInstance } from 'element-plus';
 import { PortfolioSummary } from '@/components/models/portfolio-summary';
 import { PortfolioStock } from '@/components/models/portfolio-stock';
-import PortfolioTag from '@/components/common/PortfolioTag.vue';
 import { focusOn } from '@/components/common/utils';
 import { StockCreate } from '@/components/models/stock-create';
-import { StockAdd } from '@/components/models/stock-add';
 
 const route = useRoute();
 const router = useRouter();
-const portfolioId = parseInt(route.query.portfolioId as string, 10);
-const stockCodeRef = ref('');
-const modifyPopupVisible = ref(false);
-const scaleInPopupVisible = ref(false);
 const portfolioSummary = ref(new PortfolioSummary());
 const portfolioStocks = ref<PortfolioStock[]>();
 
@@ -26,6 +17,7 @@ const searchKeyword = ref('');
 const searchKeywordRef = ref<HTMLElement>();
 const stockCreateForm = ref(new StockCreate('B'));
 const portfolioStockFormRef = ref<FormInstance>();
+const searchTimeoutId = ref(0);
 
 const stockInfo = ref({
   stockName: '선택된 종목이 없습니다.',
@@ -123,89 +115,6 @@ const getPortfolioStocks = async () => {
   ];
 };
 
-/*
-const closeScaleInPopup = async (done: () => void) => {
-  ElMessageBox.confirm('추가매수를 취소하시겠습니까?', '알림', {
-    confirmButtonText: '취소할래요',
-    cancelButtonText: '아니요'
-  }).then(() => {
-    done();
-  });
-};
-
-const scaleIn = () => {
-  console.log('scaleIn');
-};
-const openPortfolioModifyPopup = (portfolioId: number) => {
-  modifyPopupVisible.value = true;
-  // 포트폴리오 1건 조회하여 수정 팝업에 보여주기
-  // portfolioForm.value = portfolioService.getPortfolio(portfolioId);
-};
- */
-
-const openScaleInPopup = (stockCode: string) => {
-  stockCodeRef.value = stockCode;
-  scaleInPopupVisible.value = true;
-};
-
-const confirmDeletePortfolio = () => {
-  ElMessageBox.confirm('포트폴리오를 삭제하시겠습니까?', '알림', {
-    confirmButtonText: '삭제할래요',
-    cancelButtonText: '아니요'
-  }).then(() => {
-    portfolioService
-      .deletePortfolio(portfolioId)
-      .then(() => {
-        ElNotification({
-          title: '성공',
-          message: '포트폴리오를 삭제하였습니다.',
-          position: 'bottom-left',
-          type: 'success'
-        });
-
-        router.push({ name: 'portfolios' });
-      })
-      .catch(() => {
-        // catch error
-        ElNotification({
-          title: '에러',
-          message: '포트폴리오 삭제에 실패했습니다.',
-          position: 'bottom-left',
-          type: 'error'
-        });
-      });
-  });
-};
-
-const confirmDeleteStock = (stockId: number, stockName: string) => {
-  ElMessageBox.confirm(`${stockName} 종목을 삭제하시겠습니까?`, '알림', {
-    confirmButtonText: '삭제할래요',
-    cancelButtonText: '아니요'
-  }).then(() => {
-    portfolioService
-      .deleteStock(portfolioId, stockId)
-      .then(() => {
-        ElNotification({
-          title: '성공',
-          message: `${stockName} 종목을 삭제하였습니다.`,
-          position: 'bottom-left',
-          type: 'success'
-        });
-
-        getPortfolioStocks();
-      })
-      .catch(() => {
-        // catch error
-        ElNotification({
-          title: '에러',
-          message: `${stockName} 종목을 삭제에 실패하였습니다.`,
-          position: 'bottom-left',
-          type: 'error'
-        });
-      });
-  });
-};
-
 const disabledDate = (time: Date) => {
   const date = new Date();
   return time.getTime() < date.setMonth(date.getMonth() - 1);
@@ -221,6 +130,7 @@ const shortcuts = [
 const clearCreateStockForm = () => {
   portfolioStockFormRef.value?.resetFields();
   stockCreateForm.value = new StockCreate('B');
+  focusOn(searchKeywordRef.value);
 };
 
 const selectStock = (stockName: string, stockCode: string) => {
@@ -248,8 +158,6 @@ const createStockSuccessively = () => {
 const saveStock = (callback: any) => {
   // api 호출해서 저장 후 콜백 넣기
 };
-
-const searchTimeoutId = ref(0);
 
 const searchStocks = () => {
   if (searchTimeoutId.value > 0) {
