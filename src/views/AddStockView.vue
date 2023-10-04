@@ -3,7 +3,7 @@ import { onMounted, ref, toRef } from 'vue';
 import { focusOn } from '@/components/common/utils';
 import { ElMessageBox, ElNotification } from 'element-plus';
 import { PortfolioStock } from '@/components/models/portfolio-stock';
-import { StockCreate } from '@/components/models/stock-create';
+import { StockAdd } from '@/components/models/stock-add';
 import portfolioService from '@/components/services/portfolio-service';
 import type { FormInstance } from 'element-plus';
 
@@ -12,7 +12,7 @@ const vars = toRef(props, 'vars');
 const stockQuantityRef = ref<HTMLElement>();
 const portfolioStockFormRef = ref<FormInstance>();
 const portfolioStock = ref(new PortfolioStock());
-const stockCreateForm = ref(new StockCreate());
+const stockAddForm = ref(new StockAdd());
 
 onMounted(async () => {
   //console.log(vars.value.portfolioId);
@@ -36,11 +36,11 @@ onMounted(async () => {
 
 const scaleIn = () =>
   portfolioService
-    .createStock(vars.value.portfolioId, vars.value.stockCode, stockCreateForm.value)
+    .createStock(vars.value.portfolioId, vars.value.stockCode, stockAddForm.value)
     .then(() =>
       ElNotification({
         title: '성공',
-        message: `${portfolioStock.value.name} 종목을 ${stockCreateForm.value.quantity}주 추가 매수하였습니다.`,
+        message: `${portfolioStock.value.name} 종목을 ${stockAddForm.value.quantity}주 추가 매수하였습니다.`,
         position: 'bottom-left',
         type: 'success'
       })
@@ -55,10 +55,10 @@ const scaleIn = () =>
     );
 
 const applyCurrentPrice = () => {
-  if (!stockCreateForm.value.applyCurrentPrice) {
+  if (!stockAddForm.value.applyCurrentPrice) {
     // API 연결하기
     // API 연결로 현재가 가져오기
-    stockCreateForm.value.price = 1000;
+    stockAddForm.value.price = 1000;
   }
 };
 
@@ -74,7 +74,7 @@ const closeScaleInPopup = (done: () => void) => {
 
 const clearAddStockForm = () => {
   portfolioStockFormRef.value?.resetFields();
-  stockCreateForm.value = new StockCreate();
+  stockAddForm.value = new StockAdd();
 };
 
 const popupOpened = () => focusOn(stockQuantityRef.value);
@@ -126,18 +126,16 @@ const shortcuts = [
                 </el-row>
                 <el-row class="row" align="middle">
                   <el-col :span="6" class="title">추가</el-col>
-                  <el-col :span="6">{{ stockCreateForm.quantity }}</el-col>
-                  <el-col :span="6">{{ stockCreateForm.price }}</el-col>
-                  <el-col :span="6">{{ stockCreateForm.quantity * stockCreateForm.price }}</el-col>
+                  <el-col :span="6">{{ stockAddForm.quantity }}</el-col>
+                  <el-col :span="6">{{ stockAddForm.price }}</el-col>
+                  <el-col :span="6">{{ stockAddForm.quantity * stockAddForm.price }}</el-col>
                 </el-row>
                 <el-row class="row" align="middle">
                   <el-col :span="6" class="title">합계</el-col>
+                  <el-col :span="6">{{ portfolioStock.quantity + stockAddForm.quantity }}</el-col>
+                  <el-col :span="6">{{ portfolioStock.avgPrice + stockAddForm.price }}</el-col>
                   <el-col :span="6">{{
-                    portfolioStock.quantity + stockCreateForm.quantity
-                  }}</el-col>
-                  <el-col :span="6">{{ portfolioStock.avgPrice + stockCreateForm.price }}</el-col>
-                  <el-col :span="6">{{
-                    portfolioStock.totalAsset + stockCreateForm.quantity * stockCreateForm.price
+                    portfolioStock.totalAsset + stockAddForm.quantity * stockAddForm.price
                   }}</el-col>
                 </el-row>
               </el-col>
@@ -148,13 +146,13 @@ const shortcuts = [
             ref="portfolioStockFormRef"
             label-position="left"
             label-width="80"
-            :model="stockCreateForm"
+            :model="stockAddForm"
           >
             <el-form-item label="매수날짜" prop="tradeDate">
               <el-date-picker
-                v-model="stockCreateForm.tradeDate"
+                v-model="stockAddForm.tradeDate"
                 type="date"
-                placeholder="매수날짜를 입력해 주세요"
+                placeholder="매수날짜"
                 :disabled-date="disabledDate"
                 :shortcuts="shortcuts"
                 :editable="false"
@@ -162,7 +160,7 @@ const shortcuts = [
             </el-form-item>
             <el-form-item label="수량" prop="quantity">
               <el-input-number
-                v-model="stockCreateForm.quantity"
+                v-model="stockAddForm.quantity"
                 :min="0"
                 :max="999999999999999.999999999999999"
                 :controls="false"
@@ -170,11 +168,11 @@ const shortcuts = [
               />
             </el-form-item>
             <el-form-item label="매수가" prop="price">
-              <el-input-number v-model="stockCreateForm.price" :min="0" :controls="false" />
+              <el-input-number v-model="stockAddForm.price" :min="0" :controls="false" />
               <el-checkbox
                 class="ml-2"
                 label="현재가 적용"
-                v-model="stockCreateForm.applyCurrentPrice"
+                v-model="stockAddForm.applyCurrentPrice"
                 name="type"
                 @click="applyCurrentPrice"
               />
@@ -189,7 +187,7 @@ const shortcuts = [
                   color="#112D4E"
                   round
                   @click="scaleIn()"
-                  :disabled="stockCreateForm.price == 0 || stockCreateForm.quantity == 0"
+                  :disabled="stockAddForm.price == 0 || stockAddForm.quantity == 0"
                 >
                   추가매수
                 </el-button>
