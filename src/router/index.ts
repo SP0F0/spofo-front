@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import loginService from '../components/services/login-service';
+import { ElNotification } from 'element-plus';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,7 +23,16 @@ const router = createRouter({
       beforeEnter: (to, from, next) => {
         loginService
           .doLoginProcess(to.meta.socialType as string, to.query.code as string)
-          .then(() => next('/'))
+          .then(() => {
+            ElNotification({
+              title: '알림',
+              message: '로그인 하였습니다.',
+              position: 'bottom-left',
+              type: 'success'
+            });
+
+            next('/');
+          })
           .catch((error) => console.log(error));
       }
     },

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { loginStore } from '@/stores/login-store';
 import { useRouter, RouterView } from 'vue-router';
 import type { DropdownInstance } from 'element-plus';
+import { ElNotification } from 'element-plus';
 
 const useLoginStore = loginStore();
 const router = useRouter();
@@ -11,6 +12,13 @@ const memberDropdown = ref<DropdownInstance>();
 const logout = function () {
   useLoginStore.logout();
   router.push({ name: 'main' });
+
+  ElNotification({
+    title: '알림',
+    message: '로그아웃 하였습니다.',
+    position: 'bottom-left',
+    type: 'success'
+  });
 };
 
 function showDropdown() {

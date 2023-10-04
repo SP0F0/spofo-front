@@ -1,17 +1,28 @@
 class PortfolioSummary {
-  // 1개 포트폴리오에 대한 개요
-  name: string;
-  detail: string;
+  name?: string;
+  detail?: string;
   totalAsset: number;
+  totalBuy: number;
   gain: number;
   gainRate: number;
+  tag?: string;
 
-  constructor(name: string, detail: string, totalAsset: number, gain: number, gainRate: number) {
+  constructor(
+    name?: string,
+    detail?: string,
+    totalAsset = 0,
+    totalBuy = 0,
+    gain = 0,
+    gainRate = 0,
+    tag?: string
+  ) {
     this.name = name;
     this.detail = detail;
     this.totalAsset = totalAsset;
+    this.totalBuy = totalBuy;
     this.gain = gain;
     this.gainRate = gainRate;
+    this.tag = tag;
   }
 }
 

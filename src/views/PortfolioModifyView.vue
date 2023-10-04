@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { focusOn } from '@/components/common/utils';
-import { ElMessageBox } from 'element-plus';
+import { ElMessageBox, ElNotification } from 'element-plus';
+import { PortfolioModify } from '@/components/models/portfolio-modify';
+import portfolioService from '@/components/services/portfolio-service';
 import type { FormInstance } from 'element-plus';
 
 const props = defineProps(['portfolioId']);
@@ -9,27 +11,46 @@ const portfolioId = ref(props.portfolioId);
 const portfolioNameRef = ref<HTMLElement>();
 const portfolioModifyFormRef = ref<FormInstance>();
 const modifyPopupVisible = ref(false);
+const portfolioModifyForm = ref(new PortfolioModify());
 
-const portfolioModifyForm = ref({
-  name: '',
-  description: '',
-  currency: 'KRW',
-  type: 'REAL'
+onMounted(() => {
+  portfolioModifyForm.value = {
+    id: 1,
+    name: '응답받은 포트폴리오 제목',
+    description: '응답받은 포트폴리오 설명',
+    currency: 'KRW',
+    type: 'REAL'
+  };
+  /*
+  portfolioService.getPortfolio(portfolioId.value)
+    .then((response) => {
+      portfolioModifyForm.value = response.data;
+    })
+    .catch((error) => {});
+   */
 });
-
-const modifyPortfolio = (portfolioId: number) => {
+const modifyPortfolio = () => {
   modifyPopupVisible.value = false;
 
-  // 이 자료를 api로 보내면 됨
-  console.log({
-    name: portfolioModifyForm.value.name,
-    description: portfolioModifyForm.value.description,
-    currency: portfolioModifyForm.value.currency,
-    type: portfolioModifyForm.value.type
-  });
-  // 포트폴리오 1건 조회하여 수정 팝업에 보여주기
-  // 저장 혹은 취소 시 clear 해주는 로직 놓치면 안됨
-  // portfolioForm.value = portfolioService.getPortfolio(portfolioId);
+  portfolioService
+    .modifyPortfolio(portfolioModifyForm.value)
+    .then(() =>
+      ElNotification({
+        title: '성공',
+        message: '포트폴리오를 수정하였습니다.',
+        position: 'bottom-left',
+        type: 'success'
+      })
+    )
+    .catch(() =>
+      ElNotification({
+        title: '에러',
+        message: '포트폴리오 수정에 실패했습니다.',
+        position: 'bottom-left',
+        type: 'error'
+      })
+    );
+
   clearModifyForm();
 };
 
@@ -41,14 +62,10 @@ const closeModifyPopup = (done: () => void) => {
   ElMessageBox.confirm('수정하기를 취소하시겠습니까?', '알림', {
     confirmButtonText: '취소할래요',
     cancelButtonText: '아니요'
-  })
-    .then(() => {
-      clearModifyForm();
-      done();
-    })
-    .catch(() => {
-      // catch error
-    });
+  }).then(() => {
+    clearModifyForm();
+    done();
+  });
 };
 </script>
 
@@ -79,8 +96,8 @@ const closeModifyPopup = (done: () => void) => {
             <el-button
               color="#112D4E"
               round
-              @click="modifyPortfolio(portfolioId)"
-              :disabled="portfolioModifyForm.name.trim() === '' ? true : false"
+              @click="modifyPortfolio"
+              :disabled="portfolioModifyForm.name?.trim() === '' ? true : false"
             >
               수정하기
             </el-button>

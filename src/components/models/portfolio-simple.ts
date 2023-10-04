@@ -1,18 +1,18 @@
 class PortfolioSimple {
-  id: string;
+  id: number;
   name: string;
   gain: number;
   gainRate: number;
   tag: string;
-  includeYn: string;
+  includeYn: boolean;
 
   constructor(
-    id: string,
+    id: number,
     name: string,
     gain: number,
     gainRate: number,
     tag: string,
-    includeYn: string
+    includeYn: boolean
   ) {
     this.id = id;
     this.name = name;

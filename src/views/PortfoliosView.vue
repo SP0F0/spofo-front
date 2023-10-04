@@ -5,13 +5,13 @@ import portfolioService from '../components/services/portfolio-service';
 import { PortfoliosSummary } from '@/components/models/portfolios-summary';
 import type { PortfolioSimple } from '@/components/models/portfolio-simple';
 import { Plus, Setting } from '@element-plus/icons-vue';
+import PortfolioTag from '@/components/common/PortfolioTag.vue';
 
 const router = useRouter();
-const portfolioSummary = ref<PortfoliosSummary>();
-const portfolioSimples = ref<PortfolioSimple[]>();
-
 const toggle = ref(true);
 const filterOption = ref('전체');
+const portfoliosSummary = ref(new PortfoliosSummary());
+const portfolioSimples = ref<PortfolioSimple[]>();
 
 onMounted(async () => {
   /*
@@ -35,6 +35,40 @@ onMounted(async () => {
   const response = await portfolioService.getPortfolioSimples();
   portfolioSimples.value = response.data.data;
    */
+
+  portfoliosSummary.value = {
+    totalAsset: 1500,
+    gain: 20,
+    gainRate: 4.25,
+    dailyGainRate: 1.25
+  };
+
+  portfolioSimples.value = [
+    {
+      id: 1,
+      name: '모의 포트폴리오',
+      gain: 500,
+      gainRate: 2.5,
+      tag: 'FAKE',
+      includeYn: false
+    },
+    {
+      id: 2,
+      name: '실제 포트폴리오',
+      gain: 1500,
+      gainRate: 15,
+      tag: 'REAL',
+      includeYn: true
+    },
+    {
+      id: 1,
+      name: '계좌 연동 포트폴리오',
+      gain: 1500,
+      gainRate: 35,
+      tag: 'LINK',
+      includeYn: true
+    }
+  ];
 });
 
 const viewPortfolio = (portfolioId: number) => {
@@ -79,7 +113,9 @@ const changeFilterOption = () => {
               </el-row>
               <el-row>
                 <el-col :span="24">
-                  <span class="f-big"><strong>₩1000</strong></span>
+                  <span class="f-big">
+                    <strong>₩{{ portfoliosSummary?.totalAsset }}</strong>
+                  </span>
                 </el-col>
               </el-row>
             </div>
@@ -88,7 +124,7 @@ const changeFilterOption = () => {
                 <span class="f-small">평가수익</span>
               </el-col>
               <el-col :span="4">
-                <span class="f-small">₩1000</span>
+                <span class="f-small">₩{{ portfoliosSummary?.gain }}</span>
               </el-col>
             </el-row>
             <el-row>
@@ -96,7 +132,7 @@ const changeFilterOption = () => {
                 <span class="f-small">수익률</span>
               </el-col>
               <el-col :span="4">
-                <span class="f-small">10%</span>
+                <span class="f-small">{{ portfoliosSummary?.gainRate }}%</span>
               </el-col>
             </el-row>
             <el-row>
@@ -104,7 +140,7 @@ const changeFilterOption = () => {
                 <span class="f-small">일간 수익률</span>
               </el-col>
               <el-col :span="4">
-                <span class="f-small">18%</span>
+                <span class="f-small">{{ portfoliosSummary?.dailyGainRate }}%</span>
               </el-col>
             </el-row>
           </div>
@@ -137,28 +173,28 @@ const changeFilterOption = () => {
               </el-col>
             </el-row>
           </div>
-          <div class="card-body">
+          <div class="card-body" v-for="item in portfolioSimples" :key="item.id">
             <div class="stock-card">
               <el-row class="stock-card-content" align="middle">
                 <el-col :span="24">
-                  <el-tag class="mx-1 tag color-black" effect="dark" color="#FFCC1D">실제</el-tag>
+                  <PortfolioTag v-if="item.tag" :tag="item.tag" />
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" align="middle">
                 <el-col :span="21">
-                  <el-link :underline="false" @click="viewPortfolio(100)">
-                    실제 포트폴리오
+                  <el-link :underline="false" @click="viewPortfolio(item.id)">
+                    {{ item.name }}
                   </el-link>
                 </el-col>
                 <el-col :span="3">
                   <el-switch
-                    v-model="toggle"
+                    v-model="item.includeYn"
                     style="--el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
                   />
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="24"><strong>₩780 (4.45%)</strong></el-col>
+                <el-col :span="24"> ₩{{ item.gain }} ({{ item.gainRate }}%) </el-col>
               </el-row>
             </div>
           </div>
