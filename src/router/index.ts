@@ -72,10 +72,19 @@ const router = createRouter({
       meta: {
         title: 'SPOFO 포트폴리오 추가'
       }
+    },
+    {
+      path: '/my/portfolio/stock/create',
+      name: 'portfolioStockCreate',
+      component: () => import('@/views/CreateStockView.vue'),
+      meta: {
+        title: 'SPOFO 포트폴리오 종목 추가'
+      }
     }
   ]
 });
 
+/*
 router.beforeEach(function (to, from, next) {
   const pattern = new UrlPattern('/my/*');
 
@@ -99,7 +108,7 @@ router.beforeEach(function (to, from, next) {
     next();
   }
 });
-
+*/
 router.afterEach((to, from) => {
   document.title = to.meta.title === undefined ? 'SPOFO' : (to.meta.title as string);
 });
