@@ -7,6 +7,7 @@ const router = useRouter();
   <div class="main-container">
     <el-row :gutter="24">
       <el-col>
+        <!-- 메인 이미지가 들어갈 위치 -->
         <img src="../assets/images/kakao_logo.png" />
       </el-col>
     </el-row>

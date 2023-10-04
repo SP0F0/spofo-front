@@ -104,111 +104,115 @@ const applyCurrentPrice = () => {
 </script>
 
 <template>
-  <el-dialog width="40%" :before-close="closeScaleInPopup" @opened="popupOpened">
+  <el-dialog width="30%" :before-close="closeScaleInPopup" @opened="popupOpened">
     <div class="popup">
-      <div class="card-header f-big">추가 매수</div>
-      <div class="card-body">
-        <el-row class="stock-card-content" align="middle">
-          <el-col :span="4">
-            <el-avatar :size="60" />
-          </el-col>
-          <el-col :span="16">
-            <el-row class="stock-card-content" align="middle">
-              <el-col :span="24"> {{ portfolioStock.name }} </el-col>
-            </el-row>
-            <el-row class="stock-card-content" align="middle">
-              <el-col :span="24"> {{ portfolioStock.code }} </el-col>
-            </el-row>
-          </el-col>
-        </el-row>
-        <el-row class="stock-card-content" align="middle">
-          <el-col :span="24">
-            <el-row>
-              <el-col :span="6"></el-col>
-              <el-col :span="6">수량</el-col>
-              <el-col :span="6">매수가</el-col>
-              <el-col :span="6">투자금액</el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="6">현재</el-col>
-              <el-col :span="6">{{ portfolioStock.quantity }}</el-col>
-              <el-col :span="6">{{ portfolioStock.avgPrice }}</el-col>
-              <el-col :span="6">{{ portfolioStock.totalAsset }}</el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="6">추가</el-col>
-              <el-col :span="6">{{ portfolioStockForm.quantity }}</el-col>
-              <el-col :span="6">{{ portfolioStockForm.price }}</el-col>
-              <el-col :span="6">{{
-                portfolioStockForm.quantity * portfolioStockForm.price
-              }}</el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="6">추가</el-col>
-              <el-col :span="6">{{ portfolioStock.quantity + portfolioStockForm.quantity }}</el-col>
-              <el-col :span="6">{{ portfolioStock.avgPrice + portfolioStockForm.price }}</el-col>
-              <el-col :span="6">{{
-                portfolioStock.totalAsset + portfolioStockForm.quantity * portfolioStockForm.price
-              }}</el-col>
-            </el-row>
-          </el-col>
-        </el-row>
-        <el-form ref="portfolioStockFormRef" :model="portfolioStockForm" label-width="auto">
-          <el-form-item label="매수날짜" prop="tradeDate">
-            <el-date-picker
-              v-model="portfolioStockForm.tradeDate"
-              type="date"
-              placeholder="매수날짜를 입력해 주세요"
-              :disabled-date="disabledDate"
-              :shortcuts="shortcuts"
-              size="large"
-              :editable="false"
-            />
-          </el-form-item>
-          <el-form-item label="수량" prop="quantity">
-            <el-input-number
-              v-model="portfolioStockForm.quantity"
-              :min="0"
-              :max="999999999999999.999999999999999"
-              :controls="false"
-              size="large"
-              ref="stockQuantityRef"
-            />
-          </el-form-item>
-          <el-row class="stock-card-content" align="middle">
-            <el-col :span="18">
-              <el-form-item label="매수가" prop="price">
-                <el-input-number
-                  v-model="portfolioStockForm.price"
-                  :min="0"
-                  :controls="false"
-                  size="large"
-                />
-              </el-form-item>
+      <div class="add-stock-container">
+        <div class="card-header f-big">추가 매수</div>
+        <div class="card-body">
+          <el-row align="middle">
+            <el-col :span="4">
+              <el-avatar :size="60" />
             </el-col>
-            <el-col :span="6">
-              <el-form-item prop="applyCurrentPrice">
-                <el-checkbox
-                  label="현재가 적용"
-                  v-model="portfolioStockForm.applyCurrentPrice"
-                  name="type"
-                  @click="applyCurrentPrice"
-                />
-              </el-form-item>
+            <el-col :span="16">
+              <el-row align="middle">
+                <el-col :span="24" class="f-small"> {{ portfolioStock.name }} </el-col>
+                <el-col :span="24"> {{ portfolioStock.code }} </el-col>
+              </el-row>
             </el-col>
           </el-row>
-          <el-form-item class="button-container">
-            <el-button color="#112D4E" round @click="clearAddStockForm"> 초기화 </el-button>
-            <el-button
-              color="#112D4E"
-              round
-              @click="scaleIn()"
-              :disabled="portfolioStockForm.price !== 0 && portfolioStockForm.quantity !== 0"
-            >
-              추가매수
-            </el-button>
-          </el-form-item>
-        </el-form>
+          <div class="statistic">
+            <el-row align="middle">
+              <el-col :span="24">
+                <el-row class="title row" align="middle">
+                  <el-col :span="6"></el-col>
+                  <el-col :span="6">수량</el-col>
+                  <el-col :span="6">매수가</el-col>
+                  <el-col :span="6">투자금액</el-col>
+                </el-row>
+                <el-row class="row" align="middle">
+                  <el-col :span="6" class="title">현재</el-col>
+                  <el-col :span="6">{{ portfolioStock.quantity }}</el-col>
+                  <el-col :span="6">{{ portfolioStock.avgPrice }}</el-col>
+                  <el-col :span="6">{{ portfolioStock.totalAsset }}</el-col>
+                </el-row>
+                <el-row class="row" align="middle">
+                  <el-col :span="6" class="title">추가</el-col>
+                  <el-col :span="6">{{ portfolioStockForm.quantity }}</el-col>
+                  <el-col :span="6">{{ portfolioStockForm.price }}</el-col>
+                  <el-col :span="6">{{
+                    portfolioStockForm.quantity * portfolioStockForm.price
+                  }}</el-col>
+                </el-row>
+                <el-row class="row" align="middle">
+                  <el-col :span="6" class="title">합계</el-col>
+                  <el-col :span="6">{{
+                    portfolioStock.quantity + portfolioStockForm.quantity
+                  }}</el-col>
+                  <el-col :span="6">{{
+                    portfolioStock.avgPrice + portfolioStockForm.price
+                  }}</el-col>
+                  <el-col :span="6">{{
+                    portfolioStock.totalAsset +
+                    portfolioStockForm.quantity * portfolioStockForm.price
+                  }}</el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+          </div>
+          <el-form
+            class="add-stock-form"
+            ref="portfolioStockFormRef"
+            label-position="left"
+            label-width="80"
+            :model="portfolioStockForm"
+          >
+            <el-form-item label="매수날짜" prop="tradeDate">
+              <el-date-picker
+                v-model="portfolioStockForm.tradeDate"
+                type="date"
+                placeholder="매수날짜를 입력해 주세요"
+                :disabled-date="disabledDate"
+                :shortcuts="shortcuts"
+                :editable="false"
+              />
+            </el-form-item>
+            <el-form-item label="수량" prop="quantity">
+              <el-input-number
+                v-model="portfolioStockForm.quantity"
+                :min="0"
+                :max="999999999999999.999999999999999"
+                :controls="false"
+                ref="stockQuantityRef"
+              />
+            </el-form-item>
+            <el-form-item label="매수가" prop="price">
+              <el-input-number v-model="portfolioStockForm.price" :min="0" :controls="false" />
+              <el-checkbox
+                class="ml-2"
+                label="현재가 적용"
+                v-model="portfolioStockForm.applyCurrentPrice"
+                name="type"
+                @click="applyCurrentPrice"
+              />
+            </el-form-item>
+          </el-form>
+
+          <div class="button-container">
+            <el-row align="middle">
+              <el-col :span="24">
+                <el-button color="#112D4E" round @click="clearAddStockForm"> 초기화 </el-button>
+                <el-button
+                  color="#112D4E"
+                  round
+                  @click="scaleIn()"
+                  :disabled="portfolioStockForm.price !== 0 && portfolioStockForm.quantity !== 0"
+                >
+                  추가매수
+                </el-button>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
       </div>
     </div>
   </el-dialog>

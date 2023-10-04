@@ -9,7 +9,9 @@ import { Plus, Setting } from '@element-plus/icons-vue';
 const router = useRouter();
 const portfolioSummary = ref<PortfoliosSummary>();
 const portfolioSimples = ref<PortfolioSimple[]>();
+
 const toggle = ref(true);
+const filterOption = ref('전체');
 
 onMounted(async () => {
   /*
@@ -40,6 +42,10 @@ const viewPortfolio = (portfolioId: number) => {
     name: 'portfolio',
     query: { portfolioId: portfolioId }
   });
+};
+
+const changeFilterOption = () => {
+  // API를 호출하여 회원 1명의 포트폴리오를 필터링하여 조회한다.
 };
 </script>
 
@@ -109,11 +115,17 @@ const viewPortfolio = (portfolioId: number) => {
           <div class="card-header">
             <el-row align="middle">
               <el-col :span="23">
-                <el-select class="m-2" placeholder="포트폴리오 구분" size="large">
-                  <el-option label="전체" value="전체" />
-                  <el-option label="실제" value="실제" />
-                  <el-option label="모의" value="모의" />
-                  <el-option label="계좌 연동" value="계좌 연동" />
+                <el-select
+                  v-model="filterOption"
+                  class="m-2"
+                  placeholder="포트폴리오 구분"
+                  size="large"
+                  @change="changeFilterOption"
+                >
+                  <el-option key="전체" label="전체" value="전체" />
+                  <el-option key="실제" label="실제" value="실제" />
+                  <el-option key="모의" label="모의" value="모의" />
+                  <el-option key="계좌 연동" label="계좌 연동" value="계좌 연동" />
                 </el-select>
               </el-col>
               <el-col :span="1">
@@ -133,47 +145,11 @@ const viewPortfolio = (portfolioId: number) => {
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="21" @click="viewPortfolio(100)"> 실제 포트폴리오 </el-col>
-                <el-col :span="3">
-                  <el-switch
-                    v-model="toggle"
-                    style="--el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
-                  />
+                <el-col :span="21">
+                  <el-link :underline="false" @click="viewPortfolio(100)">
+                    실제 포트폴리오
+                  </el-link>
                 </el-col>
-              </el-row>
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="24"><strong>₩780 (4.45%)</strong></el-col>
-              </el-row>
-            </div>
-            <div class="stock-card">
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="24">
-                  <el-tag class="mx-1 tag color-white" effect="dark" color="#35A29F">모의</el-tag>
-                </el-col>
-              </el-row>
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="21"> 모의 포트폴리오 </el-col>
-                <el-col :span="3">
-                  <el-switch
-                    v-model="toggle"
-                    style="--el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
-                  />
-                </el-col>
-              </el-row>
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="24"><strong>₩780 (4.45%)</strong></el-col>
-              </el-row>
-            </div>
-            <div class="stock-card">
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="24">
-                  <el-tag class="mx-1 tag color-white" effect="dark" color="#FF6E31">
-                    계좌 연동
-                  </el-tag>
-                </el-col>
-              </el-row>
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="21"> 원준의 포트폴리오 </el-col>
                 <el-col :span="3">
                   <el-switch
                     v-model="toggle"

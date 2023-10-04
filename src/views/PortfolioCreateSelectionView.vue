@@ -1,8 +1,4 @@
-<script setup lang="ts">
-import { ref, watch, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import portfolioService from '../components/services/portfolio-service';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="portfolio-create-selection txt-center">
