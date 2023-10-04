@@ -293,29 +293,15 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
           <div class="card-body" v-for="stock in portfolioStocks" :key="stock.id">
             <div class="stock-card">
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="4">
-                  <el-avatar :size="60" :src="stock.imagePath" />
+                <el-col :span="4"> <el-avatar :size="60" :src="stock.imagePath" /> </el-col>
+                <el-col :span="18">
+                  <el-col span="24">{{ stock.name }} </el-col>
+                  <el-col span="24">수량 {{ stock.quantity }} </el-col>
                 </el-col>
-                <el-col :span="14"> {{ stock.name }} </el-col>
-                <el-col :span="6"> 수량 {{ stock.quantity }} </el-col>
-              </el-row>
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="20">
-                  <el-row class="stock-card-content" align="middle">
-                    <el-col :span="12"> 평가 금액 ₩{{ stock.totalAsset }}</el-col>
-                    <el-col :span="12"> 평균 매수가 ₩{{ stock.avgPrice }}</el-col>
-                  </el-row>
-                  <el-row class="stock-card-content" align="middle">
-                    <el-col :span="12"> 현재 수익 ₩{{ stock.gain }}</el-col>
-                    <el-col :span="12">
-                      현재가 ₩{{ stock.currentPrice }}({{ stock.gainRate }}%)
-                    </el-col>
-                  </el-row>
-                </el-col>
-                <el-col :span="4">
+                <el-col :span="2">
                   <el-dropdown trigger="click" size="large">
                     <span class="el-dropdown-link">
-                      <el-icon size="40"><MoreFilled /></el-icon>
+                      <el-icon size="30"><MoreFilled /></el-icon>
                     </span>
                     <template #dropdown>
                       <el-dropdown-menu>
@@ -332,6 +318,20 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
                       </el-dropdown-menu>
                     </template>
                   </el-dropdown>
+                </el-col>
+              </el-row>
+              <el-row class="stock-card-content" align="middle">
+                <el-col :span="20">
+                  <el-row class="stock-card-content" align="middle">
+                    <el-col :span="12"> 평가 금액 ₩{{ stock.totalAsset }}</el-col>
+                    <el-col :span="12"> 평균 매수가 ₩{{ stock.avgPrice }}</el-col>
+                  </el-row>
+                  <el-row class="stock-card-content" align="middle">
+                    <el-col :span="12"> 현재 수익 ₩{{ stock.gain }}</el-col>
+                    <el-col :span="12">
+                      현재가 ₩{{ stock.currentPrice }}({{ stock.gainRate }}%)
+                    </el-col>
+                  </el-row>
                 </el-col>
               </el-row>
             </div>
