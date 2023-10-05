@@ -4,14 +4,14 @@ import { useRoute, useRouter } from 'vue-router';
 import { Search } from '@element-plus/icons-vue';
 import { ElNotification, FormInstance } from 'element-plus';
 import { PortfolioSummary } from '@/components/models/portfolio-summary';
-import { PortfolioStock } from '@/components/models/portfolio-stock';
 import { focusOn } from '@/components/common/utils';
 import { StockCreate } from '@/components/models/stock-create';
+import type { Stock } from '@/components/models/stock';
 
 const route = useRoute();
 const router = useRouter();
 const portfolioSummary = ref(new PortfolioSummary());
-const portfolioStocks = ref<PortfolioStock[]>();
+const searchedStocks = ref<Stock[]>();
 
 const searchKeyword = ref('');
 const searchKeywordRef = ref<HTMLElement>();
@@ -72,45 +72,24 @@ const getPortfolioStocks = async () => {
   //const response = await portfolioService.getPortfolioStocks(portfolioId);
   //portfolioStocks.value = response.data;
 
-  portfolioStocks.value = [
+  searchedStocks.value = [
     {
-      id: 1,
       code: 'CODE1',
       name: '삼성전자',
-      sector: '기술주',
-      totalAsset: 10000,
-      gain: 900,
-      gainRate: 9.17,
-      avgPrice: 100,
-      currentPrice: 20000,
-      quantity: 50,
-      imagePath: 'https://images.therich.io/images/logo/kr/005935.png'
+      market: '기술주',
+      imageUrl: 'https://images.therich.io/images/logo/kr/005935.png'
     },
     {
-      id: 2,
-      code: 'CODE2',
+      code: 'CODE1',
       name: '하이닉스',
-      sector: '반도체',
-      totalAsset: 180000,
-      gain: 9004,
-      gainRate: 19.17,
-      avgPrice: 1500,
-      currentPrice: 2025000,
-      quantity: 5055,
-      imagePath: 'https://images.therich.io/images/logo/kr/000660.png'
+      market: '반도체',
+      imageUrl: 'https://images.therich.io/images/logo/kr/005935.png'
     },
     {
-      id: 1,
       code: 'CODE3',
       name: '현대오토에버',
-      sector: 'IT',
-      totalAsset: 1230000,
-      gain: 904,
-      gainRate: 9.7,
-      avgPrice: 1020,
-      currentPrice: 240000,
-      quantity: 504,
-      imagePath: 'https://images.therich.io/images/logo/kr/307950.png'
+      market: '기술주',
+      imageUrl: 'https://images.therich.io/images/logo/kr/005935.png'
     }
   ];
 };
@@ -133,10 +112,10 @@ const clearCreateStockForm = () => {
   focusOn(searchKeywordRef.value);
 };
 
-const selectStock = (stockName: string, stockCode: string) => {
-  stockInfo.value.stockName = stockName;
-  stockInfo.value.stockCode = stockCode;
-  stockCreateForm.value.stockCode = stockCode;
+const selectStock = (code: string, name: string) => {
+  stockCreateForm.value.stockCode = code;
+  stockInfo.value.stockCode = code;
+  stockInfo.value.stockName = name;
 };
 
 const applyCurrentPrice = () => {
@@ -290,26 +269,20 @@ const searchStocks = () => {
               <el-col :span="24" class="f-small"> 검색결과 </el-col>
             </el-row>
           </div>
-          <div class="card-body" v-for="stock in portfolioStocks" :key="stock.id">
+          <div class="card-body" v-for="stock in searchedStocks" :key="stock.code">
             <div
-              class="stock-card"
-              @click="selectStock(stock.name as string, stock.code as string)"
+              class="stock-card cur-pointer"
+              @click="selectStock(stock.code as string, stock.name as string)"
             >
               <el-row class="stock-card-content" align="middle">
                 <el-col :span="4">
-                  <el-avatar :size="60" :src="stock.imagePath" />
+                  <el-avatar :size="60" :src="stock.imageUrl" />
                 </el-col>
                 <el-col :span="14">
-                  <el-row align="middle">
-                    <el-col :span="24">
-                      {{ stock.name }}
-                    </el-col>
-                  </el-row>
-                  <el-row align="middle">
-                    <el-col :span="24"> {{ stock.code }} </el-col>
-                  </el-row>
+                  <el-col :span="24"> {{ stock.name }} </el-col>
+                  <el-col :span="24"> {{ stock.code }} </el-col>
                 </el-col>
-                <el-col :span="6"> {{ stock.sector }} 한국주식인지 바꿔주자 </el-col>
+                <el-col :span="6"> {{ stock.market }} </el-col>
               </el-row>
             </div>
           </div>
