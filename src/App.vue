@@ -32,7 +32,7 @@ function showDropdown() {
     <el-col :span="4">
       <el-link :underline="false" @click="router.push({ name: 'main' })">
         <!-- 로고가 들어갈 위치 -->
-        <img src="" alt="스포포 로고" />
+        <img class="main-logo" src="./assets/images/logo.png" alt="로고 이미지" />
       </el-link>
     </el-col>
     <el-col :span="4" class="header-content">

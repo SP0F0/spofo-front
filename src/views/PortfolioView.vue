@@ -191,6 +191,57 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
       });
   });
 };
+
+const showTradeLogs = (stock: PortfolioStock) => {
+  stock.showTradeLogs = !stock.showTradeLogs;
+
+  // portfolioId, stockId를 가지고 종목 이력 조회하기~
+  console.log(stock.id);
+  console.log(portfolioId);
+
+  stock.tradeLogs = [
+    {
+      type: 'B',
+      tradeDate: '20200101',
+      avgPrice: 243414,
+      quantity: 214,
+      gain: 214,
+      totalPrice: 55525
+    },
+    {
+      type: 'B',
+      tradeDate: '20200501',
+      avgPrice: 4,
+      quantity: 15,
+      gain: 214,
+      totalPrice: 66
+    },
+    {
+      type: 'B',
+      tradeDate: '20200101',
+      avgPrice: 24,
+      quantity: 214,
+      gain: 214,
+      totalPrice: 347
+    },
+    {
+      type: 'B',
+      tradeDate: '20200101',
+      avgPrice: 55,
+      quantity: 214,
+      gain: 214,
+      totalPrice: 15
+    },
+    {
+      type: 'B',
+      tradeDate: '20200101',
+      avgPrice: 55,
+      quantity: 214,
+      gain: 214,
+      totalPrice: 125
+    }
+  ];
+};
 </script>
 
 <template>
@@ -293,10 +344,12 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
           <div class="card-body" v-for="stock in portfolioStocks" :key="stock.id">
             <div class="stock-card">
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="4"> <el-avatar :size="60" :src="stock.imagePath" /> </el-col>
-                <el-col :span="18">
-                  <el-col span="24">{{ stock.name }} </el-col>
-                  <el-col span="24">수량 {{ stock.quantity }} </el-col>
+                <el-col :span="4">
+                  <el-avatar :size="60" :src="stock.imagePath as string" />
+                </el-col>
+                <el-col :span="18" @click="showTradeLogs(stock as PortfolioStock)">
+                  <el-col :span="24">{{ stock.name }} </el-col>
+                  <el-col :span="24">수량 {{ stock.quantity }} </el-col>
                 </el-col>
                 <el-col :span="2">
                   <el-dropdown trigger="click" size="large">
@@ -334,6 +387,18 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
                   </el-row>
                 </el-col>
               </el-row>
+              <el-collapse-transition>
+                <div v-show="stock.showTradeLogs">
+                  <el-table stripe style="border-radius: 1rem; width: 100%" :data="stock.tradeLogs">
+                    <el-table-column prop="tradeDate" label="날짜" align="center" width="90" />
+                    <el-table-column prop="type" label="종류" align="center" />
+                    <el-table-column prop="avgPrice" label="매매가" align="center" />
+                    <el-table-column prop="quantity" label="수량" align="center" />
+                    <el-table-column prop="gain" label="실현수익" align="center" />
+                    <el-table-column prop="totalPrice" label="금액" align="center" />
+                  </el-table>
+                </div>
+              </el-collapse-transition>
             </div>
           </div>
         </el-card>
