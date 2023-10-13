@@ -84,31 +84,29 @@ const router = createRouter({
   ]
 });
 
-/*
 router.beforeEach(function (to, from, next) {
   const pattern = new UrlPattern('/my/*');
 
-  if (pattern.match(to.path)) {
+  if (to.path.indexOf('/my/') > -1) {
     // authServer에 요청 후 처리
     const idToken = localStorage.getItem('authorization') || '';
-
     if (idToken) {
       authService
         .verifyToken()
         .then(() => next())
         .catch((error) => {
           needsLoginMessage();
-          next('login');
+          next('/login');
         });
     } else {
       needsLoginMessage();
-      next('login');
+      next('/login');
     }
   } else {
     next();
   }
 });
-*/
+
 router.afterEach((to, from) => {
   document.title = to.meta.title === undefined ? 'SPOFO' : (to.meta.title as string);
 });

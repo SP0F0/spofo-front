@@ -14,20 +14,13 @@ const modifyPopupVisible = ref(false);
 const portfolioModifyForm = ref(new PortfolioModify());
 
 onMounted(() => {
-  portfolioModifyForm.value = {
-    id: 1,
-    name: '응답받은 포트폴리오 제목',
-    description: '응답받은 포트폴리오 설명',
-    currency: 'KRW',
-    type: 'REAL'
-  };
-  /*
-  portfolioService.getPortfolio(portfolioId.value)
+  portfolioService
+    .getPortfolio(portfolioId.value)
     .then((response) => {
       portfolioModifyForm.value = response.data;
+      console.log(response.data);
     })
     .catch((error) => {});
-   */
 });
 const modifyPortfolio = () => {
   modifyPopupVisible.value = false;

@@ -19,39 +19,18 @@ const scaleInPopupVisible = ref(false);
 const portfolioSummary = ref(new PortfolioSummary());
 const portfolioStocks = ref<PortfolioStock[]>();
 
-/*
-const portfolioModifyFormRef = ref<FormInstance>();
-
-const portfolioStockFormRef = ref<FormInstance>();
-const portfolioStockForm = ref({
-  // 타입, 매수날짜, 매수수량, 매수
-  type: '',
-  price: '',
-  tradeDate: 'KRW',
-  quantity: 'REAL'
-});
- */
-
 onMounted(async () => {
-  // 포트폴리오 id를 가지고 포트폴리오 개요 조회
-  // 포트폴리오 id를 가지고 종목리스트 조회
   try {
-    /*
-    // 여기서 포트폴리오 개요, 종목 리스트 매핑하기
-    const response = await portfolioService.getPortfolioTotal(portfolioId);
-    portfolioSummary.value = response.data;
-     */
-    getPortfolioStocks();
+    portfolioService
+      .getPortfolioTotal(portfolioId)
+      .then((response) => {
+        portfolioSummary.value = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-    portfolioSummary.value = {
-      name: '포트폴리오 이름입니다.',
-      detail: '포트폴리오 설명입니다.',
-      totalAsset: 10000,
-      totalBuy: 9000,
-      gain: 1000,
-      gainRate: 10,
-      tag: 'REAL'
-    };
+    getPortfolioStocks();
   } catch (error) {
     ElNotification({
       title: '에러',
@@ -63,50 +42,16 @@ onMounted(async () => {
 });
 
 const getPortfolioStocks = async () => {
-  //const response = await portfolioService.getPortfolioStocks(portfolioId);
-  //portfolioStocks.value = response.data;
-
-  portfolioStocks.value = [
-    {
-      id: 1,
-      code: 'CODE1',
-      name: '삼성전자',
-      sector: '기술주',
-      totalAsset: 10000,
-      gain: 900,
-      gainRate: 9.17,
-      avgPrice: 100,
-      currentPrice: 20000,
-      quantity: 50,
-      imagePath: 'https://images.therich.io/images/logo/kr/005935.png'
-    },
-    {
-      id: 2,
-      code: 'CODE2',
-      name: '하이닉스',
-      sector: '반도체',
-      totalAsset: 180000,
-      gain: 9004,
-      gainRate: 19.17,
-      avgPrice: 1500,
-      currentPrice: 2025000,
-      quantity: 5055,
-      imagePath: 'https://images.therich.io/images/logo/kr/000660.png'
-    },
-    {
-      id: 1,
-      code: 'CODE3',
-      name: '현대오토에버',
-      sector: 'IT',
-      totalAsset: 1230000,
-      gain: 904,
-      gainRate: 9.7,
-      avgPrice: 1020,
-      currentPrice: 240000,
-      quantity: 504,
-      imagePath: 'https://images.therich.io/images/logo/kr/307950.png'
-    }
-  ];
+  portfolioService
+    .getPortfolioStocks(portfolioId)
+    .then((response) => {
+      portfolioStocks.value = response.data;
+      console.log('tt');
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 /*
@@ -118,6 +63,8 @@ const closeScaleInPopup = async (done: () => void) => {
     done();
   });
 };
+
+
 
 const scaleIn = () => {
   console.log('scaleIn');
@@ -289,7 +236,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
               <el-row>
                 <el-col :span="24">
                   <span class="f-small">
-                    <strong>{{ portfolioSummary.detail }}</strong>
+                    <strong>{{ portfolioSummary.description }}</strong>
                   </span>
                 </el-col>
               </el-row>

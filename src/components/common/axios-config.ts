@@ -13,7 +13,7 @@ instance.interceptors.request.use(
       const idToken = localStorage.getItem('authorization') || '';
 
       if (idToken != null && config.headers != null) {
-        config.headers['authorization'] = 'Bearer ' + idToken;
+        config.headers.Authorization = `${idToken}`;
         config.headers['socialType'] = localStorage.getItem('socialType') || '';
       }
     }
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
   function (error) {
     // 401 에러를 반환받았을 때 로그인 화면으로 이동
     if (error.response.status === '401') {
-      router.push({ name: 'login' });
+      router.push({ name: '/login' });
     }
     return Promise.reject(error);
   }

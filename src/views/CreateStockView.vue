@@ -7,6 +7,7 @@ import { PortfolioSummary } from '@/components/models/portfolio-summary';
 import { focusOn } from '@/components/common/utils';
 import { StockCreate } from '@/components/models/stock-create';
 import type { Stock } from '@/components/models/stock';
+import stockService from '@/components/services/stock-service';
 
 const route = useRoute();
 const router = useRouter();
@@ -51,7 +52,7 @@ onMounted(async () => {
 
     portfolioSummary.value = {
       name: '포트폴리오 이름입니다.',
-      detail: '포트폴리오 설명입니다.',
+      description: '포트폴리오 설명입니다.',
       totalAsset: 10000,
       totalBuy: 9000,
       gain: 1000,
@@ -71,7 +72,7 @@ onMounted(async () => {
 const getPortfolioStocks = async () => {
   //const response = await portfolioService.getPortfolioStocks(portfolioId);
   //portfolioStocks.value = response.data;
-
+  /*
   searchedStocks.value = [
     {
       code: 'CODE1',
@@ -92,6 +93,8 @@ const getPortfolioStocks = async () => {
       imageUrl: 'https://images.therich.io/images/logo/kr/005935.png'
     }
   ];
+
+   */
 };
 
 const disabledDate = (time: Date) => {
@@ -139,12 +142,21 @@ const saveStock = (callback: any) => {
 };
 
 const searchStocks = () => {
+  if (!searchKeyword.value) {
+    return;
+  }
+
   if (searchTimeoutId.value > 0) {
     clearTimeout(searchTimeoutId.value);
   }
 
   searchTimeoutId.value = setTimeout(() => {
-    console.log('검색 API 호출!');
+    stockService
+      .searchStocks(searchKeyword.value)
+      .then((response) => (searchedStocks.value = response.data))
+      .catch((error) => {
+        console.log('실패');
+      });
   }, 1000);
 };
 </script>
@@ -269,10 +281,10 @@ const searchStocks = () => {
               <el-col :span="24" class="f-small"> 검색결과 </el-col>
             </el-row>
           </div>
-          <div class="card-body" v-for="stock in searchedStocks" :key="stock.code">
+          <div class="card-body" v-for="stock in searchedStocks" :key="stock.stockCode">
             <div
               class="stock-card cur-pointer"
-              @click="selectStock(stock.code as string, stock.name as string)"
+              @click="selectStock(stock.stockCode as string, stock.name as string)"
             >
               <el-row class="stock-card-content" align="middle">
                 <el-col :span="4">
@@ -280,11 +292,14 @@ const searchStocks = () => {
                 </el-col>
                 <el-col :span="14">
                   <el-col :span="24"> {{ stock.name }} </el-col>
-                  <el-col :span="24"> {{ stock.code }} </el-col>
+                  <el-col :span="24"> {{ stock.stockCode }} </el-col>
                 </el-col>
                 <el-col :span="6"> {{ stock.market }} </el-col>
               </el-row>
             </div>
+          </div>
+          <div v-if="!searchedStocks">
+            <el-result icon="error" title="검색 결과가 없습니다."> </el-result>
           </div>
         </el-card>
       </el-col>
