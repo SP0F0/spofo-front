@@ -1,11 +1,11 @@
 class Stock {
-  code?: string;
+  stockCode?: string;
   name?: string;
   market?: string;
   imageUrl?: string;
 
-  constructor(code: string, name: string, market: string, imageUrl: string) {
-    this.code = code;
+  constructor(stockCode: string, name: string, market: string, imageUrl: string) {
+    this.stockCode = stockCode;
     this.name = name;
     this.market = market;
     this.imageUrl = imageUrl;
