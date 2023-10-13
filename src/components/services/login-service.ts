@@ -1,11 +1,11 @@
 import axios from '../common/axios-config';
 import { loginStore } from '@/stores/login-store';
 import { Member } from '@/components/models/member';
+import authService from '@/components/services/auth-service';
 
 class LoginService {
   doLoginProcess(socialType: string, code: string) {
     const requestUrl = this.getTokenRequestUrl(socialType, code);
-
     return axios
       .get(requestUrl)
       .then((response) => response.data.id_token)
@@ -28,11 +28,10 @@ class LoginService {
     return `${kakaoAuthRequestUrl}/token?grant_type=${grantType}&client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&code=${code}`;
   }
 
-  async addMember(socialType: string, payload: any) {
-    const authService = (await import('./auth-service')).default;
+  async addMember(platform: string, payload: any) {
     authService.addMember({
-      socialType: socialType,
-      id: payload.sub
+      platform: platform,
+      socialId: payload.sub
     });
   }
 
