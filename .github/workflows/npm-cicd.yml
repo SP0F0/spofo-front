@@ -149,3 +149,12 @@ jobs:
       - name: Remove Github Actions IP From Security Group
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
+      # 업로드한 artifacts를 삭제하기
+      - name: Remove Github Actions Artifacts
+        if : always()
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: |
+            build-result
+            Dockerfile
