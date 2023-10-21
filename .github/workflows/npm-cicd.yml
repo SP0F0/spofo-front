@@ -141,12 +141,14 @@ jobs:
           # 스크립트 중간에 실패하면 다음 스크립트를 실행하지 않는 옵션 true로 주기
           script_stop: true
           script: |
+            sudo docker rmi -f jangwonjun/spofo-front
             sudo docker pull jangwonjun/spofo-front:latest
             sudo docker rm -f spofo-front-app
             sudo docker run -p 80:80 -itd --name spofo-front-app jangwonjun/spofo-front:latest
 
       # 등록했던 인바운드 규칙을 삭제하기
       - name: Remove Github Actions IP From Security Group
+        if : always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
