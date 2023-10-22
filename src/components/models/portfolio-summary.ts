@@ -5,7 +5,7 @@ class PortfolioSummary {
   totalBuy: number;
   gain: number;
   gainRate: number;
-  tag?: string;
+  type?: string;
 
   constructor(
     name?: string,
@@ -14,7 +14,7 @@ class PortfolioSummary {
     totalBuy = 0,
     gain = 0,
     gainRate = 0,
-    tag?: string
+    type?: string
   ) {
     this.name = name;
     this.description = description;
@@ -22,7 +22,7 @@ class PortfolioSummary {
     this.totalBuy = totalBuy;
     this.gain = gain;
     this.gainRate = gainRate;
-    this.tag = tag;
+    this.type = type;
   }
 }
 

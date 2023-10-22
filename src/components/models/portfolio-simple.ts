@@ -6,7 +6,7 @@ class PortfolioSimple {
   gain: number;
   gainRate: number;
   type: string;
-  includeYn: boolean;
+  includeType: boolean;
 
   constructor(
     id: number,
@@ -16,7 +16,7 @@ class PortfolioSimple {
     gain: number,
     gainRate: number,
     type: string,
-    includeYn: boolean
+    includeType: boolean
   ) {
     this.id = id;
     this.name = name;
@@ -25,7 +25,7 @@ class PortfolioSimple {
     this.gain = gain;
     this.gainRate = gainRate;
     this.type = type;
-    this.includeYn = includeYn;
+    this.includeType = includeType;
   }
 }
 

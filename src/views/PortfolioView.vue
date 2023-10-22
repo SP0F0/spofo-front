@@ -21,15 +21,7 @@ const portfolioStocks = ref<PortfolioStock[]>();
 
 onMounted(async () => {
   try {
-    portfolioService
-      .getPortfolioTotal(portfolioId)
-      .then((response) => {
-        portfolioSummary.value = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
+    getPortfolioTotal();
     getPortfolioStocks();
   } catch (error) {
     ElNotification({
@@ -41,40 +33,23 @@ onMounted(async () => {
   }
 });
 
-const getPortfolioStocks = async () => {
+const getPortfolioTotal = () => {
   portfolioService
-    .getPortfolioStocks(portfolioId)
-    .then((response) => {
-      portfolioStocks.value = response.data;
-      console.log('tt');
-      console.log(response.data);
-    })
+    .getPortfolioTotal(portfolioId)
+    .then((response) => (portfolioSummary.value = response.data))
     .catch((error) => {
       console.log(error);
     });
 };
 
-/*
-const closeScaleInPopup = async (done: () => void) => {
-  ElMessageBox.confirm('추가매수를 취소하시겠습니까?', '알림', {
-    confirmButtonText: '취소할래요',
-    cancelButtonText: '아니요'
-  }).then(() => {
-    done();
-  });
+const getPortfolioStocks = () => {
+  portfolioService
+    .getPortfolioStocks(portfolioId)
+    .then((response) => (portfolioStocks.value = response.data))
+    .catch((error) => {
+      console.log(error);
+    });
 };
-
-
-
-const scaleIn = () => {
-  console.log('scaleIn');
-};
-const openPortfolioModifyPopup = (portfolioId: number) => {
-  modifyPopupVisible.value = true;
-  // 포트폴리오 1건 조회하여 수정 팝업에 보여주기
-  // portfolioForm.value = portfolioService.getPortfolio(portfolioId);
-};
- */
 
 const openScaleInPopup = (stockCode: string) => {
   stockCodeRef.value = stockCode;
@@ -131,7 +106,7 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
         // catch error
         ElNotification({
           title: '에러',
-          message: `${stockName} 종목을 삭제에 실패하였습니다.`,
+          message: `${stockName} 종목 삭제에 실패하였습니다.`,
           position: 'bottom-left',
           type: 'error'
         });
@@ -218,7 +193,18 @@ const showTradeLogs = (stock: PortfolioStock) => {
                       </el-dropdown-menu>
                     </template>
                   </el-dropdown>
-                  <PortfolioModifyView v-model="modifyPopupVisible" :portfolioId="portfolioId" />
+                  <PortfolioModifyView
+                    v-if="modifyPopupVisible"
+                    v-model="modifyPopupVisible"
+                    :portfolioId="portfolioId"
+                    @close="
+                      () => {
+                        getPortfolioTotal();
+                        getPortfolioStocks();
+                        modifyPopupVisible = false;
+                      }
+                    "
+                  />
                 </div>
               </el-col>
             </el-row>
@@ -230,7 +216,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
                   <span class="f-big">{{ portfolioSummary.name }}</span>
                 </el-col>
                 <el-col :span="4">
-                  <PortfolioTag v-if="portfolioSummary.tag" :tag="portfolioSummary.tag" />
+                  <PortfolioTag v-if="portfolioSummary.type" :tag="portfolioSummary.type" />
                 </el-col>
               </el-row>
               <el-row>

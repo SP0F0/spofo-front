@@ -36,7 +36,7 @@ onMounted(async () => {
 
 const scaleIn = () =>
   portfolioService
-    .createStock(vars.value.portfolioId, vars.value.stockCode, stockAddForm.value)
+    .createStock(vars.value.portfolioId, stockAddForm.value)
     .then(() =>
       ElNotification({
         title: '성공',

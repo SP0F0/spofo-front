@@ -3,6 +3,7 @@ import loginService from '../components/services/login-service';
 import { ElNotification } from 'element-plus';
 import UrlPattern from 'url-pattern';
 import authService from '@/components/services/auth-service';
+import portfolioService from '@/components/services/portfolio-service';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +48,20 @@ const router = createRouter({
       component: () => import('@/views/PortfoliosView.vue'),
       meta: {
         title: 'SPOFO 포트폴리오 관리'
+      },
+      beforeEnter: (to, from, next) => {
+        portfolioService
+          .getPortfolioSimples()
+          .then((response) => {
+            if (response.data.length == 0) {
+              // 포트폴리오 없는 경우 포폴 만들기 화면으로 보내기
+              router.push({ name: 'portfolioCreate' });
+            }
+            next();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     },
     {

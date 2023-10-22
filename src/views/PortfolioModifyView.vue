@@ -10,8 +10,8 @@ const props = defineProps(['portfolioId']);
 const portfolioId = ref(props.portfolioId);
 const portfolioNameRef = ref<HTMLElement>();
 const portfolioModifyFormRef = ref<FormInstance>();
-const modifyPopupVisible = ref(false);
 const portfolioModifyForm = ref(new PortfolioModify());
+const emits = defineEmits(['close']);
 
 onMounted(() => {
   portfolioService
@@ -20,21 +20,21 @@ onMounted(() => {
       portfolioModifyForm.value = response.data;
       console.log(response.data);
     })
-    .catch((error) => {});
+    .catch((error) => console.log(error));
 });
-const modifyPortfolio = () => {
-  modifyPopupVisible.value = false;
 
+const modifyPortfolio = () => {
   portfolioService
     .modifyPortfolio(portfolioModifyForm.value)
-    .then(() =>
+    .then(() => {
       ElNotification({
         title: '성공',
         message: '포트폴리오를 수정하였습니다.',
         position: 'bottom-left',
         type: 'success'
-      })
-    )
+      });
+      close();
+    })
     .catch(() =>
       ElNotification({
         title: '에러',
@@ -43,27 +43,28 @@ const modifyPortfolio = () => {
         type: 'error'
       })
     );
-
-  clearModifyForm();
 };
 
 const popupOpened = () => focusOn(portfolioNameRef.value);
 
-const clearModifyForm = () => portfolioModifyFormRef.value?.resetFields();
-
-const closeModifyPopup = (done: () => void) => {
+const closeConfirm = (done: () => void) => {
   ElMessageBox.confirm('수정하기를 취소하시겠습니까?', '알림', {
     confirmButtonText: '취소할래요',
     cancelButtonText: '아니요'
   }).then(() => {
-    clearModifyForm();
+    close();
     done();
   });
+};
+
+const close = () => {
+  portfolioModifyFormRef.value?.resetFields();
+  emits('close');
 };
 </script>
 
 <template>
-  <el-dialog width="30%" :before-close="closeModifyPopup" @opened="popupOpened">
+  <el-dialog width="30%" :before-close="closeConfirm" @opened="popupOpened">
     <div class="popup">
       <div class="card-header f-big">포트폴리오 수정</div>
       <div class="card-body">

@@ -6,6 +6,10 @@ class StockService {
   searchStocks(keyword: string) {
     return axios.get(this.stockServer + `/stocks/search?keyword=${keyword}`);
   }
+
+  getStock(stockCode: string) {
+    return axios.get(this.stockServer + `/stocks/${stockCode}`);
+  }
 }
 
 const stockService = new StockService();

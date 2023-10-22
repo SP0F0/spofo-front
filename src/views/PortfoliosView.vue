@@ -9,15 +9,24 @@ import PortfolioTag from '@/components/common/PortfolioTag.vue';
 import { PortfolioModify } from '@/components/models/portfolio-modify';
 
 const router = useRouter();
-const toggle = ref(true);
 const filterOption = ref('전체');
 const portfoliosSummary = ref(new PortfoliosSummary());
 const portfolioSimples = ref<PortfolioSimple[]>();
 
 onMounted(() => {
-  // todo 포트폴리오 없는 경우 포폴 만들기 화면으로 보내기
-  // todo includeYn 수정하는 거 맞추기
-  // 종목 개략정보 조회
+  getPortfoliosTotal();
+  getPortfolioSimples();
+});
+
+const getPortfolioSimples = () =>
+  portfolioService
+    .getPortfolioSimples()
+    .then((response) => (portfolioSimples.value = response.data))
+    .catch((error) => {
+      console.log(error);
+    });
+
+const getPortfoliosTotal = () =>
   portfolioService
     .getPortfoliosTotal()
     .then((response) => (portfoliosSummary.value = response.data))
@@ -25,24 +34,11 @@ onMounted(() => {
       console.log(error);
     });
 
-  // 포트폴리오 리스트 조회
-  portfolioService
-    .getPortfolioSimples()
-    .then((response) => (portfolioSimples.value = response.data))
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
 const viewPortfolio = (portfolioId: number) => {
   router.push({
     name: 'portfolio',
     query: { portfolioId: portfolioId }
   });
-};
-
-const changeFilterOption = () => {
-  // API를 호출하여 회원 1명의 포트폴리오를 필터링하여 조회한다.
 };
 
 const switchInclude = (portfolio: PortfolioSimple) => {
@@ -52,13 +48,20 @@ const switchInclude = (portfolio: PortfolioSimple) => {
     portfolio.description,
     portfolio.currency,
     portfolio.type,
-    portfolio.includeYn
+    portfolio.includeType
   );
 
   portfolioService
     .modifyPortfolio(modifiedPortfolio)
-    .then((response) => console.log(response))
+    .then((response) => {
+      getPortfoliosTotal();
+      getPortfolioSimples();
+    })
     .catch((error) => console.log(error));
+};
+
+const changeFilterOption = () => {
+  // API를 호출하여 회원 1명의 포트폴리오를 필터링하여 조회한다.
 };
 </script>
 
@@ -160,7 +163,7 @@ const switchInclude = (portfolio: PortfolioSimple) => {
                 </el-col>
                 <el-col :span="3">
                   <el-switch
-                    v-model="item.includeYn"
+                    v-model="item.includeType"
                     style="--el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
                     @click="switchInclude(item)"
                   />
