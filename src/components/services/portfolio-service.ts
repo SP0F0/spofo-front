@@ -7,6 +7,7 @@ class PortfolioService {
   portfolioServer = import.meta.env.VITE_PORTFOLIO_SERVER;
 
   getPortfoliosTotal() {
+    console.log(this.portfolioServer);
     return axios.get(this.portfolioServer + '/portfolios/total');
   }
 
@@ -34,11 +35,8 @@ class PortfolioService {
     return axios.put(this.portfolioServer + `/portfolios/${portfolio.id}`, portfolio);
   }
 
-  createStock(portfolioId: number, stockCode: string, stock: StockCreate) {
-    return axios.post(
-      this.portfolioServer + `/portfolios/${portfolioId}/stocks/${stockCode}`,
-      stock
-    );
+  createStock(portfolioId: number, stock: StockCreate) {
+    return axios.post(this.portfolioServer + `/portfolios/${portfolioId}/stocks`, stock);
   }
 
   deletePortfolio(portfolioId: number) {

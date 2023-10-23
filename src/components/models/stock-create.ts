@@ -1,6 +1,6 @@
 class StockCreate {
   type?: string;
-  stockCode?: string;
+  code?: string;
   avgPrice: number;
   tradeDate: Date;
   quantity: number;
@@ -15,7 +15,7 @@ class StockCreate {
     applyCurrentPrice = false
   ) {
     this.type = type;
-    this.stockCode = stockCode;
+    this.code = stockCode;
     this.avgPrice = avgPrice;
     this.tradeDate = tradeDate;
     this.quantity = quantity;

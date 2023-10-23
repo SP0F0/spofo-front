@@ -3,6 +3,7 @@ import loginService from '../components/services/login-service';
 import { ElNotification } from 'element-plus';
 import UrlPattern from 'url-pattern';
 import authService from '@/components/services/auth-service';
+import portfolioService from '@/components/services/portfolio-service';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +48,20 @@ const router = createRouter({
       component: () => import('@/views/PortfoliosView.vue'),
       meta: {
         title: 'SPOFO 포트폴리오 관리'
+      },
+      beforeEnter: (to, from, next) => {
+        portfolioService
+          .getPortfolioSimples()
+          .then((response) => {
+            if (response.data.length == 0) {
+              // 포트폴리오 없는 경우 포폴 만들기 화면으로 보내기
+              router.push({ name: 'portfolioCreate' });
+            }
+            next();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     },
     {
@@ -84,31 +99,29 @@ const router = createRouter({
   ]
 });
 
-/*
 router.beforeEach(function (to, from, next) {
   const pattern = new UrlPattern('/my/*');
 
-  if (pattern.match(to.path)) {
+  if (to.path.indexOf('/my/') > -1) {
     // authServer에 요청 후 처리
     const idToken = localStorage.getItem('authorization') || '';
-
     if (idToken) {
       authService
         .verifyToken()
         .then(() => next())
         .catch((error) => {
           needsLoginMessage();
-          next('login');
+          next('/login');
         });
     } else {
       needsLoginMessage();
-      next('login');
+      next('/login');
     }
   } else {
     next();
   }
 });
-*/
+
 router.afterEach((to, from) => {
   document.title = to.meta.title === undefined ? 'SPOFO' : (to.meta.title as string);
 });

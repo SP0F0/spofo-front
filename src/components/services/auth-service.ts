@@ -8,7 +8,7 @@ class AuthService {
   }
 
   addMember(loggedInMemberInfo: any) {
-    return axios.put(this.authServer + '/auth/members/', loggedInMemberInfo);
+    return axios.put(this.authServer + '/auth/members', loggedInMemberInfo);
   }
 }
 
