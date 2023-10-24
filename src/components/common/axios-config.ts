@@ -9,14 +9,14 @@ const needsAuthDomain = ['portfolio', 'auth'];
 
 instance.interceptors.request.use(
   function (config) {
-    //if (needsAuthDomain.includes(pattern.match(config.url!).subdomain, 0)) {
-    const idToken = localStorage.getItem('authorization') || '';
+    if (needsAuthDomain.includes(pattern.match(config.url!).subdomain, 0)) {
+      const idToken = localStorage.getItem('authorization') || '';
 
-    if (idToken != null && config.headers != null) {
-      config.headers.Authorization = `${idToken}`;
-      config.headers['socialType'] = localStorage.getItem('socialType') || '';
+      if (idToken != null && config.headers != null) {
+        config.headers.Authorization = `${idToken}`;
+        config.headers['socialType'] = localStorage.getItem('socialType') || '';
+      }
     }
-    //}
 
     return config;
   },
@@ -25,6 +25,7 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
 
 instance.interceptors.response.use(
   function (response) {

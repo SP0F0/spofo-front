@@ -22,17 +22,13 @@ const getPortfolioSimples = () =>
   portfolioService
     .getPortfolioSimples()
     .then((response) => (portfolioSimples.value = response.data))
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 
 const getPortfoliosTotal = () =>
   portfolioService
     .getPortfoliosTotal()
     .then((response) => (portfoliosSummary.value = response.data))
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 
 const viewPortfolio = (portfolioId: number) => {
   router.push({

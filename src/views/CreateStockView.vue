@@ -2,10 +2,10 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Search } from '@element-plus/icons-vue';
-import { ElNotification, FormInstance } from 'element-plus';
-import { PortfolioSummary } from '@/components/models/portfolio-summary';
+import { ElNotification } from 'element-plus';
 import { focusOn } from '@/components/common/utils';
 import { StockCreate } from '@/components/models/stock-create';
+import type { FormInstance } from 'element-plus';
 import type { Stock } from '@/components/models/stock';
 import stockService from '@/components/services/stock-service';
 import portfolioService from '@/components/services/portfolio-service';
@@ -19,7 +19,7 @@ const searchKeyword = ref('');
 const searchKeywordRef = ref<HTMLElement>();
 const stockCreateForm = ref(new StockCreate('B'));
 const portfolioStockFormRef = ref<FormInstance>();
-const searchTimeoutId = ref(0);
+const searchTimeoutId = ref<ReturnType<typeof setTimeout> | undefined>();
 const currentPriceCheck = ref(false);
 
 const stockInfo = ref({
@@ -66,7 +66,7 @@ const applyCurrentPrice = () => {
   }
 };
 
-const createStock = (callback) => {
+const createStock = (callback: any) => {
   portfolioService
     .createStock(portfolioId, stockCreateForm.value)
     .then(() => {
@@ -88,12 +88,19 @@ const createStock = (callback) => {
     );
 };
 
+const goBack = () => {
+  router.push({
+    name: 'portfolio',
+    query: { portfolioId: portfolioId }
+  });
+}
+
 const searchStocks = () => {
   if (!searchKeyword.value.trim()) {
     return;
   }
 
-  if (searchTimeoutId.value > 0) {
+  if (searchTimeoutId.value) {
     clearTimeout(searchTimeoutId.value);
   }
 
@@ -196,12 +203,7 @@ const searchStocks = () => {
                       color="#112D4E"
                       round
                       @click="
-                        createStock(
-                          router.push({
-                            name: 'portfolio',
-                            query: { portfolioId: portfolioId }
-                          })
-                        )
+                        createStock(goBack)
                       "
                       :disabled="
                         !stockCreateForm.code ||

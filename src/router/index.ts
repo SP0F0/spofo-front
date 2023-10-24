@@ -103,7 +103,6 @@ router.beforeEach(function (to, from, next) {
   const pattern = new UrlPattern('/my/*');
 
   if (to.path.indexOf('/my/') > -1) {
-    // authServer에 요청 후 처리
     const idToken = localStorage.getItem('authorization') || '';
     if (idToken) {
       authService

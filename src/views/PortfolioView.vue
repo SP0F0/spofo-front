@@ -14,6 +14,7 @@ const route = useRoute();
 const router = useRouter();
 const portfolioId = parseInt(route.query.portfolioId as string, 10);
 const stockCodeRef = ref('');
+const stockIdRef = ref(0);
 const modifyPopupVisible = ref(false);
 const scaleInPopupVisible = ref(false);
 const portfolioSummary = ref(new PortfolioSummary());
@@ -45,13 +46,12 @@ const getPortfolioTotal = () => {
 const getPortfolioStocks = () => {
   portfolioService
     .getPortfolioStocks(portfolioId)
-    .then((response) => (portfolioStocks.value = response.data))
-    .catch((error) => {
-      console.log(error);
-    });
+    .then((response) =>(portfolioStocks.value = response.data))
+    .catch((error) => console.log(error));
 };
 
-const openScaleInPopup = (stockCode: string) => {
+const openScaleInPopup = (stockId: number, stockCode: string) => {
+  stockIdRef.value = stockId;
   stockCodeRef.value = stockCode;
   scaleInPopupVisible.value = true;
 };
@@ -74,7 +74,6 @@ const confirmDeletePortfolio = () => {
         router.push({ name: 'portfolios' });
       })
       .catch(() => {
-        // catch error
         ElNotification({
           title: '에러',
           message: '포트폴리오 삭제에 실패했습니다.',
@@ -103,7 +102,6 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
         getPortfolioStocks();
       })
       .catch(() => {
-        // catch error
         ElNotification({
           title: '에러',
           message: `${stockName} 종목 삭제에 실패하였습니다.`,
@@ -116,10 +114,6 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
 
 const showTradeLogs = (stock: PortfolioStock) => {
   stock.showTradeLogs = !stock.showTradeLogs;
-
-  // portfolioId, stockId를 가지고 종목 이력 조회하기~
-  console.log(stock.id);
-  console.log(portfolioId);
 
   stock.tradeLogs = [
     {
@@ -293,7 +287,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
                       <el-dropdown-menu>
                         <el-dropdown-item
                           :icon="Plus"
-                          @click="openScaleInPopup(stock.code as string)"
+                          @click="openScaleInPopup(stock.id as number, stock.code as string)"
                           >추가 매수</el-dropdown-item
                         >
                         <el-dropdown-item
@@ -342,8 +336,16 @@ const showTradeLogs = (stock: PortfolioStock) => {
       v-model="scaleInPopupVisible"
       :vars="{
         portfolioId: portfolioId,
-        stockCode: stockCodeRef
+        stockCode: stockCodeRef,
+        stockId: stockIdRef
       }"
+      @close="
+        () => {
+          getPortfolioTotal();
+          getPortfolioStocks();
+          scaleInPopupVisible = false;
+        }
+      "
     />
   </div>
 </template>

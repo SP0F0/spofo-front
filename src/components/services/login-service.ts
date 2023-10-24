@@ -39,7 +39,7 @@ class LoginService {
     const useLoginStore = loginStore();
 
     localStorage.setItem('socialType', socialType);
-    localStorage.setItem('authorization', idToken);
+    localStorage.setItem('authorization', `Bearer ${idToken}`);
     useLoginStore.login(new Member(payload.nickname, payload.picture));
   }
 }
