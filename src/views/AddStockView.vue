@@ -54,7 +54,8 @@ const scaleIn = () =>
 const applyCurrentPrice = () => {
   if (
     !stockAddForm.value.applyCurrentPrice &&
-    !currentPriceCheck.value
+    !currentPriceCheck.value &&
+    stockAddForm.value.code
   ) {
     stockService
     .getStock(stockAddForm.value.code)

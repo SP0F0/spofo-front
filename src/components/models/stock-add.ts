@@ -4,6 +4,8 @@ class StockAdd {
   avgPrice: number;
   tradeDate: Date;
   quantity: number;
+  applyCurrentPrice?: boolean;
+
 
   constructor(
     code?: string,
@@ -11,12 +13,14 @@ class StockAdd {
     avgPrice = 0,
     tradeDate = new Date(),
     quantity = 0,
+    applyCurrentPrice = false
   ) {
     this.code = code;
     this.type = type;
     this.avgPrice = avgPrice;
     this.tradeDate = tradeDate;
     this.quantity = quantity;
+    this.applyCurrentPrice = applyCurrentPrice;
   }
 }
 
