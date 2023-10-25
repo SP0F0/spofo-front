@@ -17,9 +17,18 @@ body {
   color: #120064 !important;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .header {
   padding: 1rem;
   background-color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.header .nav-btn {
+  color: #120064 !important;
   font-size: 1.1rem;
 }
 
@@ -29,8 +38,6 @@ body {
 
 .header-content {
   text-align: center;
-  height: 50px;
-  line-height: 50px;
 }
 
 .main-container {
