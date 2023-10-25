@@ -1,9 +1,12 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+* {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important;
+}
+
 body {
-  /* 구글 웹 폰트 적용 */
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #112D4E !important;
+  color: #120064 !important;
   margin: 0px;
-  height: 95vh;
 }
 
 .main-logo {
@@ -11,12 +14,12 @@ body {
 }
 
 .el-link__inner {
-  color: #112D4E !important;
+  color: #120064 !important;
 }
 
 .header {
   padding: 1rem;
-  background-color: #DBE2EF;
+  background-color: #ffffff;
   font-size: 1.1rem;
 }
 
@@ -36,10 +39,29 @@ body {
   text-align: center;
 }
 
+.main-container .first-box {
+  padding-top: 20vh;
+}
+
+.main-container .main-first-text {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.main-container .main-first-logo {
+  width: 30vw;
+  margin: 2vh;
+}
+
 .main-container .login-btn {
-  width: 50%;
-  height: 5rem !important;
-  font-size: 2.5rem !important;
+  width: 18rem !important;
+  height: 6rem !important;
+  font-size: 3rem !important;
+  color: #00f61d !important;
+  font-weight: bold;
+  margin: 100px;
 }
 
 .login .button-container {
@@ -74,7 +96,9 @@ body {
   margin-bottom: 2rem;
 }
 
-.portfolios-summary-container, .portfolio-summary-container, .create-stock-container {
+.portfolios-summary-container,
+.portfolio-summary-container,
+.create-stock-container {
   width: 85%;
   margin: auto;
 }
@@ -88,9 +112,12 @@ body {
   font-size: 1.2rem;
 }
 
-.portfolios-summary-container .box-card, .portfolio-create-container .box-card,
-.portfolio-summary-container .box-card, .portfolio-create-container .box-card,
-.create-stock-container .box-card, .portfolio-create-container .box-card {
+.portfolios-summary-container .box-card,
+.portfolio-create-container .box-card,
+.portfolio-summary-container .box-card,
+.portfolio-create-container .box-card,
+.create-stock-container .box-card,
+.portfolio-create-container .box-card {
   width: 80%;
   margin: 5rem auto;
   border-radius: 1rem;
@@ -103,9 +130,12 @@ body {
   padding: 0.5rem;
 }
 
-.portfolios-summary-container .card-body, .portfolio-create-container .card-body,
-.portfolio-summary-container .card-body, .portfolio-create-container .card-body,
-.create-stock-container .card-body, .portfolio-create-container .card-body {
+.portfolios-summary-container .card-body,
+.portfolio-create-container .card-body,
+.portfolio-summary-container .card-body,
+.portfolio-create-container .card-body,
+.create-stock-container .card-body,
+.portfolio-create-container .card-body {
   padding: 0.5rem;
 }
 
@@ -207,7 +237,8 @@ body {
   font-size: 1.5rem;
 }
 
-.el-dialog, .el-message-box {
+.el-dialog,
+.el-message-box {
   border-radius: 2rem !important;
   background-color: #DBE2EF !important;
 }
