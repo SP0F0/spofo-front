@@ -80,7 +80,7 @@ body {
   position: absolute;
   top: 35%;
   font-weight: bold;
-  font-size: 66px;
+  font-size: 60px;
   color: #ffffff;
   padding-left: 10vh;
 }
@@ -93,7 +93,6 @@ body {
   font-weight: light;
   font-size: 35px;
   color: #ffffff;
-  margin-top: 2vh;
   padding-left: 10vh;
 }
 
@@ -103,6 +102,41 @@ body {
   padding-top: 8%;
   width: 60vh;
   height: 60vh;
+}
+
+.main-container .third-box {
+  background-color: #fff;
+  position: relative;
+  height: 100vh;
+}
+
+.main-container .main-content2 {
+  display: flex;
+  padding-left:10%;
+  padding-top: 8%;
+  width: 60vh;
+  height: 60vh;
+}
+
+.main-container .main-third-text-title {
+  display: flex;
+  position: absolute;
+  font-weight: bold;
+  font-size: 60px;
+  color: #120064;
+  top: 35%;
+  left: 55%;
+}
+
+.main-container .main-third-text-content {
+  display: flex;
+  position: absolute;
+  text-align: left;
+  font-weight: light;
+  font-size: 35px;
+  color: #120064;
+  top: 45%;
+  left: 55%;
 }
 
 .login .button-container {

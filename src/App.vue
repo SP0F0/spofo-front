@@ -48,7 +48,7 @@ function showDropdown() {
       <el-dropdown ref="memberDropdown" trigger="contextmenu" size="large">
         <span class="el-dropdown-link">
           <el-link :underline="false" @click="showDropdown">
-            <el-avatar :size="50" :src="useLoginStore.getMember.imagePath" />
+            <el-avatar :size="40" :src="useLoginStore.getMember.imagePath" />
           </el-link>
         </span>
         <template #dropdown>
