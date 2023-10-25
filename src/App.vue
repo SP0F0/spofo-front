@@ -44,7 +44,7 @@ function showDropdown() {
     <el-col :span="3" class="header-content"> </el-col>
     <el-col :span="3" class="header-content"> </el-col>
     <el-col :span="3" class="header-content"> </el-col>
-    <el-col class="header-content" :span="4" v-if="useLoginStore.isAuthedMember">
+    <el-col class="header-content" :span="3" v-if="useLoginStore.isAuthedMember">
       <el-dropdown ref="memberDropdown" trigger="contextmenu" size="large">
         <span class="el-dropdown-link">
           <el-link :underline="false" @click="showDropdown">
