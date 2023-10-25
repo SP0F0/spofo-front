@@ -4,7 +4,6 @@ import { loginStore } from '@/stores/login-store';
 import { useRouter, RouterView } from 'vue-router';
 import type { DropdownInstance } from 'element-plus';
 import { ElNotification } from 'element-plus';
-import { ElMenuItem } from 'element-plus';
 
 const useLoginStore = loginStore();
 const router = useRouter();
