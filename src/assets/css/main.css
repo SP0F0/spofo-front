@@ -167,6 +167,71 @@ body {
   left: 55%;
 }
 
+.main-container .last-box {
+  background-color: #120064;
+  position: relative;
+  height: 100vh;
+}
+
+.main-container .last-box-ask {
+  background-color: #fff;
+  position: absolute;
+  height: 35vh;
+  width: calc(100vw - 10%);
+  margin: 5%;
+  padding: 5% 0%;
+  border-radius: 30px;
+}
+
+.main-container .ask-logo {
+  width: 25rem;
+  padding-left: 10%;
+}
+
+.main-container .main-last-text {
+  padding-left: 10%;
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 2%;
+  align-self: flex-end;
+}
+
+.main-container .main-last-btn {
+  text-align: center;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.main-container .ask-btn {
+  width: 18rem;
+  height: 7rem !important;
+  font-size: 4rem;
+  color: #00f61d;
+}
+
+.main-container .footer {
+  background-color: #fff;
+  position: absolute;
+  width: 100vw;
+  padding: 5rem;
+  bottom: 0;
+}
+
+.main-container .footer-names {
+  text-align: left;
+  font-size: 2rem;
+}
+
+.main-container .footer-copyright {
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+.main-container .footer-logo {
+  width: 12rem;
+}
+
 .login .button-container {
   width: 30rem;
   margin: auto;
