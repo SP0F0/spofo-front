@@ -19,5 +19,16 @@ const router = useRouter();
         </el-col>
       </el-row>
     </div>
+    <div class="second-box">
+      <el-row class="main-second-text-title">
+        포트폴리오의 누적 수익률
+      </el-row>
+      <el-row class="main-second-text-content">
+        포트폴리오의 수익률을 보고 싶으신가요?<br/>
+        스포포가 누적 수익률을 알려드려요.<br/>
+        선택한 포트폴리오의 수익률만 볼 수 있어요!
+      </el-row>
+      <img src="../assets/images/content1.png" class="main-content1" />
+    </div>
   </div>
 </template>
