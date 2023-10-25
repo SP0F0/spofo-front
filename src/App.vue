@@ -29,19 +29,21 @@ function showDropdown() {
 
 <template>
   <el-row :gutter="10" align="middle" class="header">
-    <el-col :span="4">
+    <el-col :span="3">
       <el-link :underline="false" @click="router.push({ name: 'main' })">
         <!-- 로고가 들어갈 위치 -->
         <img class="main-logo" src="./assets/images/logo.png" alt="로고 이미지" />
       </el-link>
     </el-col>
-    <el-col :span="4" class="header-content">
-      <el-link :underline="false" @click="router.push({ name: 'portfolios' })">포트폴리오</el-link>
+    <el-col :span="3" class="header-content">
+      <el-button class="nav-btn" size="large" @click="router.push({ name: 'portfolios' })" text>포트폴리오</el-button>
     </el-col>
     <!-- 추후 상단바에 메뉴가 추가되면 넣을 위치 -->
-    <el-col :span="4" class="header-content"> </el-col>
-    <el-col :span="4" class="header-content"> </el-col>
-    <el-col :span="4" class="header-content"> </el-col>
+    <el-col :span="3" class="header-content"> </el-col>
+    <el-col :span="3" class="header-content"> </el-col>
+    <el-col :span="3" class="header-content"> </el-col>
+    <el-col :span="3" class="header-content"> </el-col>
+    <el-col :span="3" class="header-content"> </el-col>
     <el-col class="header-content" :span="4" v-if="useLoginStore.isAuthedMember">
       <el-dropdown ref="memberDropdown" trigger="contextmenu" size="large">
         <span class="el-dropdown-link">
@@ -58,8 +60,8 @@ function showDropdown() {
         </template>
       </el-dropdown>
     </el-col>
-    <el-col :span="4" v-else class="txt-center">
-      <el-link :underline="false" @click="router.push({ name: 'login' })">로그인</el-link>
+    <el-col :span="3" v-else class="txt-center">
+      <el-button class="nav-btn" size="large" @click="router.push({ name: 'login' })" text>로그인</el-button>
     </el-col>
   </el-row>
   <div class="container">

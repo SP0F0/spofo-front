@@ -23,14 +23,17 @@ body {
   font-size: 1.1rem;
 }
 
+.header .nav-btn {
+  color: #120064 !important;
+  font-size: 1.1rem;
+}
+
 .header .el-link__inner {
   font-size: 1.1rem;
 }
 
 .header-content {
   text-align: center;
-  height: 50px;
-  line-height: 50px;
 }
 
 .main-container {

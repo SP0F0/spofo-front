@@ -5,7 +5,7 @@ const router = useRouter();
 
 <template>
   <div class="main-container">
-    <img style="width: 100vw; height: 100vh; position: fixed; right: 0%;" src="../assets/images/circular_bg.png" />
+    <img style="width: 100vw; height: 100vh; position: absolute; right: 0%;" src="../assets/images/circular_bg.png" />
     <div class="first-box">
       <el-row class="main-first-text">
         누구나 쉽게 관리하는 주식 포트폴리오
