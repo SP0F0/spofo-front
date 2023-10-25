@@ -17,10 +17,6 @@ body {
   color: #120064 !important;
 }
 
-.flex-grow {
-  flex-grow: 1;
-}
-
 .header {
   padding: 1rem;
   background-color: #ffffff;
