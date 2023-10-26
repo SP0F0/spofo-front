@@ -162,18 +162,26 @@ body {
 
 .main-container .second-box {
   background-color: #120064;
-  position: relative;
   height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.main-container .second-box-content {
+  padding-left: 8%;
+  padding-right: 8%;
+  width: 100%
 }
 
 .main-container .main-second-text-title {
   display: flex;
   position: absolute;
-  top: 35%;
+  top: 25%;
   font-weight: bold;
   font-size: 60px;
   color: #ffffff;
-  padding-left: 10vh;
+  margin-bottom: 2vh;
 }
 
 .main-container .main-second-text-content {
@@ -184,50 +192,56 @@ body {
   font-weight: light;
   font-size: 35px;
   color: #ffffff;
-  padding-left: 10vh;
 }
 
 .main-container .main-content1 {
   display: flex;
-  padding-left:58%;
-  padding-top: 8%;
-  width: 60vh;
   height: 60vh;
+  float: right;
 }
 
 .main-container .third-box {
   background-color: #fff;
-  position: relative;
   height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.main-container .third-box-content {
+  padding-left: 8%;
+  padding-right: 8%;
+  width: 100%;
 }
 
 .main-container .main-content2 {
   display: flex;
-  padding-left:10%;
-  padding-top: 8%;
-  width: 60vh;
+  float: left;
   height: 60vh;
 }
 
 .main-container .main-third-text-title {
   display: flex;
   position: absolute;
+  left: 57%;
+  top: 25%;
   font-weight: bold;
   font-size: 60px;
   color: #120064;
-  top: 35%;
-  left: 55%;
+  float: right;
+  margin-bottom: 2vh;
 }
 
 .main-container .main-third-text-content {
   display: flex;
   position: absolute;
+  left: 57%;
+  top: 45%;
   text-align: left;
   font-weight: light;
   font-size: 35px;
   color: #120064;
-  top: 45%;
-  left: 55%;
+  float: right;
 }
 
 .main-container .last-box {

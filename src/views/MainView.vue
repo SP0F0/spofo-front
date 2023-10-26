@@ -25,27 +25,39 @@ const router = useRouter();
       </div>
     </div>
     <div class="second-box">
-      <el-row class="main-second-text-title">
-        포트폴리오의&nbsp;
-        <span style="color: #00f61d">누적 수익률</span>
+      <el-row class="second-box-content">
+        <el-col :span="12" class="second-text">
+          <el-row class="main-second-text-title">
+            포트폴리오의&nbsp;
+            <span style="color: #00f61d">누적 수익률</span>
+          </el-row>
+          <el-row class="main-second-text-content">
+            포트폴리오의 수익률을 보고 싶으신가요?<br/>
+            스포포가 누적 수익률을 알려드려요.<br/>
+            선택한 포트폴리오의 수익률만 볼 수 있어요!
+          </el-row>
+        </el-col>
+        <el-col :span="12" class="second-img">
+          <img src="../assets/images/content1.png" class="main-content1" />
+        </el-col>
       </el-row>
-      <el-row class="main-second-text-content">
-        포트폴리오의 수익률을 보고 싶으신가요?<br />
-        스포포가 누적 수익률을 알려드려요.<br />
-        선택한 포트폴리오의 수익률만 볼 수 있어요!
-      </el-row>
-      <img src="../assets/images/content1.png" class="main-content1" />
     </div>
     <div class="third-box">
-      <img src="../assets/images/content2.png" class="main-content2" />
-      <el-row class="main-third-text-title">
-        <span style="color: #00f61d">다양한 유형</span>
-        의 포트폴리오
-      </el-row>
-      <el-row class="main-third-text-content">
-        모의로 투자를 해보고 싶으신가요?<br />
-        실제 투자를 포트폴리오로 만들고 싶으신가요?<br />
-        스포포에서 원하는 유형으로 만들어 보세요!
+      <el-row class="third-box-content">
+        <el-col :span="12" class="third-img">
+          <img src="../assets/images/content2.png" class="main-content2" />
+        </el-col>
+        <el-col :span="12" class="third-text">
+          <el-row class="main-third-text-title">
+            <span style="color: #00f61d">다양한 유형</span>
+            의 포트폴리오
+          </el-row>
+          <el-row class="main-third-text-content">
+            모의로 투자를 해보고 싶으신가요?<br/>
+            실제 투자를 포트폴리오로 만들고 싶으신가요?<br/>
+            스포포에서 원하는 유형으로 만들어 보세요!
+          </el-row>
+        </el-col>
       </el-row>
     </div>
     <div class="last-box">
