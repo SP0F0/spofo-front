@@ -18,6 +18,11 @@ const router = useRouter();
           </el-button>
         </el-col>
       </el-row>
+      <div class="down-arrow">
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+      </div>
     </div>
     <div class="second-box">
       <el-row class="second-box-content">

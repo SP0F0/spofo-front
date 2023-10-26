@@ -97,6 +97,69 @@ body {
   margin: 100px;
 }
 
+.main-container .down-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chevron {
+  position: absolute;
+  width: 2.1rem;
+  height: 0.48rem;
+  opacity: 0;
+  transform: scale(0.3);
+  animation: move 3s ease-out infinite;
+}
+
+.chevron:first-child {
+  animation: move 3s ease-out 1s infinite;
+}
+
+.chevron:nth-child(2) {
+  animation: move 3s ease-out 2s infinite;
+}
+
+.chevron:before,
+.chevron:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: #120064;
+}
+
+.chevron:before {
+  left: 0;
+  transform: skewY(30deg);
+}
+
+.chevron:after {
+  right: 0;
+  width: 50%;
+  transform: skewY(-30deg);
+}
+
+@keyframes move {
+  25% {
+    opacity: 1;
+
+  }
+  33% {
+    opacity: 1;
+    transform: translateY(2.28rem);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(3.12rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(4.8rem) scale(0.5);
+  }
+}
+
 .main-container .second-box {
   background-color: #120064;
   height: 100vh;
@@ -116,7 +179,7 @@ body {
   position: absolute;
   top: 25%;
   font-weight: bold;
-  font-size: 60px;
+  font-size: 3.5rem;
   color: #ffffff;
   margin-bottom: 2vh;
 }
@@ -127,14 +190,15 @@ body {
   top: 45%;
   text-align: left;
   font-weight: light;
-  font-size: 35px;
+  font-size: 2rem;
   color: #ffffff;
 }
 
 .main-container .main-content1 {
-  display: flex;
-  height: 60vh;
   float: right;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .main-container .third-box {
@@ -152,9 +216,10 @@ body {
 }
 
 .main-container .main-content2 {
-  display: flex;
   float: left;
-  height: 60vh;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .main-container .main-third-text-title {
@@ -163,7 +228,7 @@ body {
   left: 57%;
   top: 25%;
   font-weight: bold;
-  font-size: 60px;
+  font-size: 3.5rem;
   color: #120064;
   float: right;
   margin-bottom: 2vh;
@@ -176,7 +241,7 @@ body {
   top: 45%;
   text-align: left;
   font-weight: light;
-  font-size: 35px;
+  font-size: 2rem;
   color: #120064;
   float: right;
 }
