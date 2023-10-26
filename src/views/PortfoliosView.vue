@@ -65,77 +65,66 @@ const changeFilterOption = () => {
   <div class="portfolios-summary-container">
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-card class="box-card" shadow="never">
+        <el-card class="box-card" shadow="always">
           <div class="card-header">
             <el-row align="middle">
-              <el-col :span="23"></el-col>
-              <el-col :span="1">
-                <div class="text item">
-                  <el-button type="info" circle link size="large">
-                    <el-icon
-                      size="30"
-                      color="#000"
-                      @click="router.push({ name: 'portfolioCreate' })"
-                    >
-                      <Plus />
-                    </el-icon>
-                  </el-button>
-                </div>
+              <el-col :span="22"></el-col>
+              <el-col :span="2">
+                <el-button type="info" circle link size="large">
+                  <el-icon size="30" color="#000" @click="router.push({ name: 'portfolioCreate' })">
+                    <Plus />
+                  </el-icon>
+                </el-button>
               </el-col>
             </el-row>
           </div>
           <div class="card-body">
             <div class="card-body-header">
               <el-row>
-                <el-col :span="24"><span class="f-small">총 자산</span></el-col>
+                <el-col :span="24"><span class="f-big">총 자산</span></el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <span class="f-big">
-                    <strong>₩{{ portfoliosSummary?.totalAsset }}</strong>
+                    <strong>₩{{ portfoliosSummary?.totalAsset.toLocaleString() }}</strong>
                   </span>
                 </el-col>
               </el-row>
             </div>
             <el-row>
-              <el-col :span="20">
+              <el-col :span="12">
                 <span class="f-small">평가수익</span>
               </el-col>
-              <el-col :span="4">
-                <span class="f-small txt-right">₩{{ portfoliosSummary?.gain }}</span>
+              <el-col :span="12" class="f-small txt-right">
+                <span>₩{{ portfoliosSummary?.gain.toLocaleString() }}</span>
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="20">
+              <el-col :span="12">
                 <span class="f-small">수익률</span>
               </el-col>
-              <el-col :span="4">
-                <span class="f-small txt-right">{{ portfoliosSummary?.gainRate }}%</span>
+              <el-col :span="12" class="f-small txt-right">
+                <span>{{ portfoliosSummary?.gainRate }}%</span>
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="20">
+              <el-col :span="12">
                 <span class="f-small">일간 수익률</span>
               </el-col>
-              <el-col :span="4">
-                <span class="f-small txt-right">{{ portfoliosSummary?.dailyGainRate }}%</span>
+              <el-col :span="12" class="f-small txt-right">
+                <span>{{ portfoliosSummary?.dailyGainRate }}%</span>
               </el-col>
             </el-row>
           </div>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card" shadow="never">
+        <el-card class="box-card" shadow="always">
           <div class="card-header">
             <el-row align="middle">
               <el-col :span="24">
-                <el-select
-                  v-model="filterOption"
-                  class="m-2"
-                  placeholder="포트폴리오 구분"
-                  size="large"
-                  @change="changeFilterOption"
-                >
+                <el-select v-model="filterOption" class="m-2" placeholder="포트폴리오 구분" size="large"
+                  @change="changeFilterOption">
                   <el-option key="전체" label="전체" value="전체" />
                   <el-option key="실제" label="실제" value="실제" />
                   <el-option key="모의" label="모의" value="모의" />
@@ -152,21 +141,18 @@ const changeFilterOption = () => {
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="21">
+                <el-col :span="20">
                   <el-link :underline="false" @click="viewPortfolio(item.id)">
                     {{ item.name }}
                   </el-link>
                 </el-col>
-                <el-col :span="3">
-                  <el-switch
-                    v-model="item.includeType"
-                    style="--el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
-                    @click="switchInclude(item)"
-                  />
+                <el-col :span="4">
+                  <el-switch v-model="item.includeType" size="large"
+                    style="float: right; --el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af" @click="switchInclude(item)" />
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="24"> ₩{{ item.gain }} ({{ item.gainRate }}%) </el-col>
+                <el-col :span="24"> {{ item.gain.toLocaleString() }}원 ({{ item.gainRate }}%) </el-col>
               </el-row>
             </div>
           </div>

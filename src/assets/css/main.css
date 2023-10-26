@@ -365,7 +365,7 @@ body {
 .portfolio-create-container .box-card,
 .create-stock-container .box-card,
 .portfolio-create-container .box-card {
-  width: 80%;
+  width: 90%;
   margin: 5rem auto;
   border-radius: 1rem;
   background-color: #F9F7F7;
@@ -416,7 +416,7 @@ body {
 }
 
 .portfolios-summary-container .card-body .stock-card .el-link__inner {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .portfolios-summary-container .card-body .stock-card .stock-card-content,
