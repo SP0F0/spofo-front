@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import portfolioService from '../components/services/portfolio-service';
 import { PortfoliosSummary } from '@/components/models/portfolios-summary';
 import type { PortfolioSimple } from '@/components/models/portfolio-simple';
-import { Plus, Setting } from '@element-plus/icons-vue';
+import { Plus } from '@element-plus/icons-vue';
 import PortfolioTag from '@/components/common/PortfolioTag.vue';
 import { PortfolioModify } from '@/components/models/portfolio-modify';
 
@@ -21,7 +21,10 @@ onMounted(() => {
 const getPortfolioSimples = () =>
   portfolioService
     .getPortfolioSimples()
-    .then((response) => (portfolioSimples.value = response.data))
+    .then((response) => {
+      (portfolioSimples.value = response.data)
+      console.log(response.data);
+    })
     .catch((error) => console.log(error));
 
 const getPortfoliosTotal = () =>
@@ -86,7 +89,7 @@ const changeFilterOption = () => {
               <el-row>
                 <el-col :span="24">
                   <span class="f-big">
-                    <strong>₩{{ portfoliosSummary?.totalAsset.toLocaleString() }}</strong>
+                    <strong>{{ portfoliosSummary?.totalAsset.toLocaleString() }}원</strong>
                   </span>
                 </el-col>
               </el-row>
@@ -96,7 +99,7 @@ const changeFilterOption = () => {
                 <span class="f-small">평가수익</span>
               </el-col>
               <el-col :span="12" class="f-small txt-right">
-                <span>₩{{ portfoliosSummary?.gain.toLocaleString() }}</span>
+                <span>{{ portfoliosSummary?.gain.toLocaleString() }}원</span>
               </el-col>
             </el-row>
             <el-row>
@@ -148,11 +151,17 @@ const changeFilterOption = () => {
                 </el-col>
                 <el-col :span="4">
                   <el-switch v-model="item.includeType" size="large"
-                    style="float: right; --el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af" @click="switchInclude(item)" />
+                    style="float: right; --el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
+                    @click="switchInclude(item)" />
                 </el-col>
               </el-row>
-              <el-row class="stock-card-content" align="middle">
-                <el-col :span="24"> {{ item.gain.toLocaleString() }}원 ({{ item.gainRate }}%) </el-col>
+              <el-row class="stock-card-content" align="center">
+                <el-col :span="3" align="right"> 자산가치&nbsp; </el-col>
+                <el-col :span="21" align="left"> {{ item.totalAsset.toLocaleString() }}원 </el-col>
+                <el-col :span="3" align="right"> 수익률&nbsp; </el-col>
+                <el-col :span="21" align="left"> {{ item.gainRate }}% </el-col>
+                <el-col :span="3" align="right"> 수익&nbsp; </el-col>
+                <el-col :span="21" align="left"> {{ item.gain.toLocaleString() }}원</el-col>
               </el-row>
             </div>
           </div>

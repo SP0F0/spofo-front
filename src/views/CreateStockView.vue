@@ -142,7 +142,7 @@ const searchStocks = () => {
           <div class="card-body">
             <el-form
               ref="portfolioStockFormRef"
-              label-width="80"
+              label-width="100"
               class="create-stock-form"
               :model="stockCreateForm"
             >
@@ -254,7 +254,7 @@ const searchStocks = () => {
                   <el-col :span="24"> {{ stock.name }} </el-col>
                   <el-col :span="24"> {{ stock.stockCode }} </el-col>
                 </el-col>
-                <el-col :span="6"> {{ stock.market }} </el-col>
+                <el-col align="right" :span="6" class="market"> {{ stock.market }} </el-col>
               </el-row>
             </div>
           </div>
