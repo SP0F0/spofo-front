@@ -29,6 +29,7 @@ time, mark, audio, video {
 body {
   box-sizing: border-box;
   color: #120064 !important;
+  overflow-x: hidden;
 }
 
 .main-logo {
