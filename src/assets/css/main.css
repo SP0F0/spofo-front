@@ -391,8 +391,12 @@ body {
 .portfolio-summary-container .card-body .card-body-header,
 .portfolio-create-container .card-body .card-body-header,
 .create-stock-container .card-body .card-body-header {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   margin-bottom: 2rem;
+}
+
+.portfolio-summary-container .card-body .card-body-header .tag-icon {
+  float: right;
 }
 
 .portfolios-summary-container .card-body .el-row,
@@ -420,11 +424,17 @@ body {
   font-size: 1.5rem;
 }
 
-.portfolios-summary-container .card-body .stock-card .stock-card-content,
-.portfolio-summary-container .card-body .stock-card .stock-card-content,
-.create-stock-container .card-body .stock-card .stock-card-content {
+.portfolio-summary-container .card-body .stock-card .stock-card-content {
   margin-bottom: 0.5rem;
   padding: 0.1rem;
+}
+
+.portfolios-summary-container .card-body .stock-card .stock-card-content {
+  margin: 0.5rem;
+}
+
+.create-stock-container .card-body .stock-card .stock-card-content {
+  margin: 0 1rem;
 }
 
 .portfolios-summary-container .card-body .stock-card .el-col {

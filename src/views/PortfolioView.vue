@@ -166,14 +166,14 @@ const showTradeLogs = (stock: PortfolioStock) => {
       <el-col :span="12">
         <el-card class="box-card" shadow="always">
           <div class="card-header">
-            <el-row align="middle">
+            <el-row align="center">
               <el-col :span="23"></el-col>
               <el-col :span="1">
                 <div class="text item">
                   <el-dropdown trigger="click" size="large">
                     <span class="el-dropdown-link">
                       <el-icon size="30" color="#000">
-                        <Setting />
+                        <Setting class="setting-icon"/>
                       </el-icon>
                     </span>
                     <template #dropdown>
@@ -210,7 +210,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
                   <span class="f-big">{{ portfolioSummary.name }}</span>
                 </el-col>
                 <el-col :span="4">
-                  <PortfolioTag v-if="portfolioSummary.type" :tag="portfolioSummary.type" />
+                  <PortfolioTag class="tag-icon" v-if="portfolioSummary.type" :tag="portfolioSummary.type" />
                 </el-col>
               </el-row>
               <el-row>
@@ -224,20 +224,20 @@ const showTradeLogs = (stock: PortfolioStock) => {
             <el-row>
               <el-col :span="16"><span class="f-small">총 자산</span></el-col>
               <el-col :span="8" class="txt-right">
-                <span class="f-small"> ₩{{ portfolioSummary.totalAsset }} </span>
+                <span class="f-small"> {{ portfolioSummary.totalAsset.toLocaleString() }}원 </span>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="16"><span class="f-small">총 매수 금액</span></el-col>
               <el-col :span="8" class="txt-right">
-                <span class="f-small"> ₩{{ portfolioSummary.totalBuy }} </span>
+                <span class="f-small"> {{ portfolioSummary.totalBuy.toLocaleString() }}원 </span>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="16"><span class="f-small">평가 수익</span></el-col>
               <el-col :span="8" class="txt-right">
                 <span class="f-small">
-                  ₩{{ portfolioSummary.gain }} ({{ portfolioSummary.gainRate }}%)
+                  {{ portfolioSummary.gain.toLocaleString() }}원 ({{ portfolioSummary.gainRate }}%)
                 </span>
               </el-col>
             </el-row>
@@ -275,7 +275,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
                   <el-avatar :size="60" :src="stock.imagePath as string" />
                 </el-col>
                 <el-col :span="18" @click="showTradeLogs(stock as PortfolioStock)">
-                  <el-col :span="24">{{ stock.name }} </el-col>
+                  <el-col :span="24" class="f-small">{{ stock.name }} </el-col>
                   <el-col :span="24">수량 {{ stock.quantity }} </el-col>
                 </el-col>
                 <el-col :span="2">
@@ -301,15 +301,15 @@ const showTradeLogs = (stock: PortfolioStock) => {
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" align="middle">
-                <el-col :span="20">
+                <el-col :span="24">
                   <el-row class="stock-card-content" align="middle">
-                    <el-col :span="12"> 평가 금액 ₩{{ stock.totalAsset }}</el-col>
-                    <el-col :span="12"> 평균 매수가 ₩{{ stock.avgPrice }}</el-col>
+                    <el-col :span="12"> 평가 금액&nbsp {{ stock.totalAsset.toLocaleString() }}원</el-col>
+                    <el-col :span="12"> 평균 매수가&nbsp {{ stock.avgPrice.toLocaleString() }}원</el-col>
                   </el-row>
                   <el-row class="stock-card-content" align="middle">
-                    <el-col :span="12"> 현재 수익 ₩{{ stock.gain }}</el-col>
+                    <el-col :span="12"> 현재 수익&nbsp {{ stock.gain.toLocaleString() }}원</el-col>
                     <el-col :span="12">
-                      현재가 ₩{{ stock.currentPrice }}({{ stock.gainRate }}%)
+                      현재가&nbsp {{ stock.currentPrice.toLocaleString() }}원 ({{ stock.gainRate }}%)
                     </el-col>
                   </el-row>
                 </el-col>
