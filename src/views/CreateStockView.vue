@@ -212,7 +212,7 @@ const searchStocks = () => {
                         !stockCreateForm.tradeDate
                       "
                     >
-                      추가매수
+                      저장
                     </el-button>
                     <el-button
                       color="#112D4E"

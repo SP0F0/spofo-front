@@ -245,7 +245,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card" shadow="never">
+        <el-card class="box-card" shadow="always">
           <div class="card-header">
             <el-row align="middle">
               <el-col :span="23" class="f-big">보유종목 </el-col>
