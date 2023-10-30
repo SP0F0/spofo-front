@@ -272,7 +272,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
             <div class="stock-card">
               <el-row class="stock-card-content" align="middle">
                 <el-col :span="4">
-                  <el-avatar :size="60" :src="stock.imagePath as string" />
+                  <el-avatar :size="60" :src="stock.imagePath as string" @click="showTradeLogs(stock as PortfolioStock)"/>
                 </el-col>
                 <el-col :span="18" @click="showTradeLogs(stock as PortfolioStock)">
                   <el-col :span="24" class="f-small">{{ stock.name }} </el-col>
