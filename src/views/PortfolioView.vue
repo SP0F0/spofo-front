@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Plus, Setting, Delete, EditPen } from '@element-plus/icons-vue';
 import { ElMessageBox, ElNotification } from 'element-plus';
@@ -114,50 +114,22 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
 
 const showTradeLogs = (stock: PortfolioStock) => {
   stock.showTradeLogs = !stock.showTradeLogs;
-
-  stock.tradeLogs = [
-    {
-      type: 'B',
-      tradeDate: '20200101',
-      avgPrice: 243414,
-      quantity: 214,
-      gain: 214,
-      totalPrice: 55525
-    },
-    {
-      type: 'B',
-      tradeDate: '20200501',
-      avgPrice: 4,
-      quantity: 15,
-      gain: 214,
-      totalPrice: 66
-    },
-    {
-      type: 'B',
-      tradeDate: '20200101',
-      avgPrice: 24,
-      quantity: 214,
-      gain: 214,
-      totalPrice: 347
-    },
-    {
-      type: 'B',
-      tradeDate: '20200101',
-      avgPrice: 55,
-      quantity: 214,
-      gain: 214,
-      totalPrice: 15
-    },
-    {
-      type: 'B',
-      tradeDate: '20200101',
-      avgPrice: 55,
-      quantity: 214,
-      gain: 214,
-      totalPrice: 125
-    }
-  ];
+  if(stock.id != undefined){
+    portfolioService.showTradeLogs(portfolioId, stock.id)
+    .then((response) => {
+      console.log(response.data);
+      stock.tradeLogs = response.data;
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 };
+
+const dateFormat = (row,column) => {
+  var date = row[column.prop];
+  return dayjs(date).format("YYYY-MM-DD");
+}
+
 </script>
 
 <template>
@@ -317,7 +289,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
               <el-collapse-transition>
                 <div v-show="stock.showTradeLogs">
                   <el-table stripe style="border-radius: 1rem; width: 100%" :data="stock.tradeLogs">
-                    <el-table-column prop="tradeDate" label="날짜" align="center" width="90" />
+                    <el-table-column prop="tradeDate" label="날짜" :formatter="dateFormat" align="center" width="105" />
                     <el-table-column prop="type" label="종류" align="center" />
                     <el-table-column prop="avgPrice" label="매매가" align="center" />
                     <el-table-column prop="quantity" label="수량" align="center" />
