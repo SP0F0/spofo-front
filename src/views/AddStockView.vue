@@ -107,7 +107,7 @@ const shortcuts = [
         <div class="card-body">
           <el-row align="middle">
             <el-col :span="4">
-              <el-avatar :size="60"/>
+              <el-avatar :size="60" :src="portfolioStock.imagePath as string"/>
             </el-col>
             <el-col :span="16">
               <el-row align="middle">
