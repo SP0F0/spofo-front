@@ -99,7 +99,7 @@ const confirmDeleteStock = (stockId: number, stockName: string) => {
           position: 'bottom-left',
           type: 'success'
         });
-
+        getPortfolioTotal();
         getPortfolioStocks();
       })
       .catch(() => {
