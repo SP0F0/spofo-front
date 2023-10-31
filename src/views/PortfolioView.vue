@@ -280,10 +280,9 @@ const dateFormat = (row: { [x: string]: any; }, column: string | number) => {
                     <el-col :span="12"> 평균 매수가&nbsp {{ stock.avgPrice.toLocaleString() }}원</el-col>
                   </el-row>
                   <el-row class="stock-card-content" align="middle">
-                    <el-col :span="12"> 현재 수익&nbsp {{ stock.gain.toLocaleString() }}원</el-col>
+                    <el-col :span="12"> 현재 수익&nbsp {{ stock.gain.toLocaleString() }}원 ({{ stock.gainRate }}%)</el-col>
                     <el-col :span="12">
-                      현재가&nbsp {{ stock.currentPrice.toLocaleString() }}원 ({{ stock.gainRate }}%)
-                    </el-col>
+                      현재가&nbsp {{ stock.currentPrice.toLocaleString() }}원</el-col>
                   </el-row>
                 </el-col>
               </el-row>
