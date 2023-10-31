@@ -155,13 +155,13 @@ const changeFilterOption = () => {
                     @click="switchInclude(item)" />
                 </el-col>
               </el-row>
-              <el-row class="stock-card-content" align="center">
-                <el-col :span="3" align="right"> 자산가치&nbsp; </el-col>
-                <el-col :span="21" align="left"> {{ item.totalAsset.toLocaleString() }}원 </el-col>
-                <el-col :span="3" align="right"> 수익률&nbsp; </el-col>
-                <el-col :span="21" align="left"> {{ item.gainRate }}% </el-col>
-                <el-col :span="3" align="right"> 수익&nbsp; </el-col>
-                <el-col :span="21" align="left"> {{ item.gain.toLocaleString() }}원</el-col>
+              <el-row class="stock-card-content" :align="'center'">
+                <el-col :span="3"> 자산가치&nbsp; </el-col>
+                <el-col :span="21"> {{ item.totalAsset.toLocaleString() }}원 </el-col>
+                <el-col :span="3"> 수익률&nbsp; </el-col>
+                <el-col :span="21"> {{ item.gainRate }}% </el-col>
+                <el-col :span="3"> 수익&nbsp; </el-col>
+                <el-col :span="21"> {{ item.gain.toLocaleString() }}원</el-col>
               </el-row>
             </div>
           </div>
