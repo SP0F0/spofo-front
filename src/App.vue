@@ -39,7 +39,9 @@ function showDropdown() {
       <el-button class="nav-btn" size="large" @click="router.push({ name: 'portfolios' })" text>포트폴리오</el-button>
     </el-col>
     <!-- 추후 상단바에 메뉴가 추가되면 넣을 위치 -->
-    <el-col :span="3" class="header-content"> </el-col>
+    <el-col :span="3" class="header-content"> 
+      <el-button class="nav-btn" size="large" @click="router.push({ name: 'return' })" text>누적 수익률</el-button>
+    </el-col>
     <el-col :span="3" class="header-content"> </el-col>
     <el-col :span="3" class="header-content"> </el-col>
     <el-col :span="3" class="header-content"> </el-col>

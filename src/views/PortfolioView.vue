@@ -59,7 +59,7 @@ const openScaleInPopup = (stockId: number, stockCode: string) => {
 
 const confirmDeletePortfolio = () => {
   ElMessageBox.confirm('포트폴리오를 삭제하시겠습니까?', '알림', {
-    confirmButtonText: '삭제할래요',
+    confirmButtonText: '예',
     cancelButtonText: '아니요'
   }).then(() => {
     portfolioService
@@ -87,7 +87,7 @@ const confirmDeletePortfolio = () => {
 
 const confirmDeleteStock = (stockId: number, stockName: string) => {
   ElMessageBox.confirm(`${stockName} 종목을 삭제하시겠습니까?`, '알림', {
-    confirmButtonText: '삭제할래요',
+    confirmButtonText: '예',
     cancelButtonText: '아니요'
   }).then(() => {
     portfolioService
@@ -129,7 +129,7 @@ const showTradeLogs = (stock: PortfolioStock) => {
 const dateFormat = (row: { [x: string]: any; }, column: string | number) => {
   var date = row[column];
   return dayjs(date).format("YYYY-MM-DD");
-} 
+}
 
 </script>
 

@@ -95,6 +95,11 @@ const router = createRouter({
       meta: {
         title: 'SPOFO 포트폴리오 종목 추가'
       }
+    },
+    {
+      path: '/my/return',
+      name: 'return',
+      component: () => import('@/views/ReturnView.vue')
     }
   ]
 });
