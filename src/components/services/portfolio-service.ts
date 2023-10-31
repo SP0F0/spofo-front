@@ -3,6 +3,7 @@ import type { PortfolioCreate } from '@/components/models/portfolio-create';
 import type { PortfolioModify } from '@/components/models/portfolio-modify';
 import type { StockCreate } from '@/components/models/stock-create';
 import type { StockAdd } from "@/components/models/stock-add";
+import type { TradeLog } from "@/components/models/trade-log";
 
 class PortfolioService {
   portfolioServer = import.meta.env.VITE_PORTFOLIO_SERVER;
@@ -54,6 +55,12 @@ class PortfolioService {
   getHoldingStock(portfolioId: number, stockId: number) {
     return axios.get(this.portfolioServer + `/portfolios/${portfolioId}/stocks/${stockId}`);
   }
+
+  showTradeLogs(portfolioId: number, stockId: number) {
+    return axios.get(this.portfolioServer + `/portfolios/${portfolioId}/stocks/${stockId}/trade-log`);
+  }
+
+
 }
 
 const portfolioService = new PortfolioService();
