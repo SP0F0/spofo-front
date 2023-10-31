@@ -7,6 +7,7 @@ import type { PortfolioSimple } from '@/components/models/portfolio-simple';
 import { Plus } from '@element-plus/icons-vue';
 import PortfolioTag from '@/components/common/PortfolioTag.vue';
 import { PortfolioModify } from '@/components/models/portfolio-modify';
+import { Select, CloseBold } from '@element-plus/icons-vue'
 
 const router = useRouter();
 const filterOption = ref('전체');
@@ -152,7 +153,7 @@ const changeFilterOption = () => {
                 <el-col :span="4">
                   <el-switch v-model="item.includeType" size="large"
                     style="float: right; --el-switch-on-color: #120064; --el-switch-off-color: #0065B8"
-                    @click="switchInclude(item)" />
+                    @click="switchInclude(item)" inline-prompt :active-icon="Select" :inactive-icon="CloseBold" />
                 </el-col>
               </el-row>
               <el-row class="stock-card-content" :align="'center'">
