@@ -59,14 +59,14 @@ const applyCurrentPrice = () => {
   ) {
     stockService
     .getStock(stockAddForm.value.code)
-    .then((response) => (stockAddForm.value.avgPrice = response.data.price))
+    .then((response) => (stockAddForm.value.avgPrice = parseInt(response.data.price)))
     .catch((error) => console.log(error));
   }
 };
 
 const closeScaleInPopup = (done: () => void) => {
   ElMessageBox.confirm('추가매수를 취소하시겠습니까?', '알림', {
-    confirmButtonText: '취소할래요',
+    confirmButtonText: '예',
     cancelButtonText: '아니요'
   }).then(() => {
     close();
@@ -107,7 +107,7 @@ const shortcuts = [
         <div class="card-body">
           <el-row align="middle">
             <el-col :span="4">
-              <el-avatar :size="60" />
+              <el-avatar :size="60"/>
             </el-col>
             <el-col :span="16">
               <el-row align="middle">
@@ -189,9 +189,9 @@ const shortcuts = [
           <div class="button-container">
             <el-row align="middle">
               <el-col :span="24">
-                <el-button color="#112D4E" round @click="clear"> 초기화 </el-button>
+                <el-button color="#120064" round @click="clear"> 초기화 </el-button>
                 <el-button
-                  color="#112D4E"
+                  color="#120064"
                   round
                   @click="scaleIn()"
                   :disabled="stockAddForm.avgPrice == 0 || stockAddForm.quantity == 0"

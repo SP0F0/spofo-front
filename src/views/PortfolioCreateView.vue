@@ -82,7 +82,7 @@ const createPortfolio = () => {
               </el-form-item>
               <el-form-item class="button-container">
                 <el-button
-                  color="#112D4E"
+                  color="#120064"
                   round
                   @click="createPortfolio"
                   :disabled="!portfolioCreateForm.name"
