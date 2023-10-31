@@ -49,7 +49,7 @@ const popupOpened = () => focusOn(portfolioNameRef.value);
 
 const closeConfirm = (done: () => void) => {
   ElMessageBox.confirm('수정하기를 취소하시겠습니까?', '알림', {
-    confirmButtonText: '취소할래요',
+    confirmButtonText: '예',
     cancelButtonText: '아니요'
   }).then(() => {
     close();

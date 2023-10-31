@@ -33,27 +33,18 @@ body {
 }
 
 .main-logo {
-  width: 70%;
-}
-
-.el-link__inner {
-  color: #120064 !important;
+  width: 75%;
 }
 
 .header {
   width: 100%;
   padding: 1rem;
   background-color: #ffffff;
-  font-size: 1.1rem;
 }
 
 .header .nav-btn {
   color: #120064 !important;
-  font-size: 1.1rem;
-}
-
-.header .el-link__inner {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .header-content {
@@ -106,8 +97,8 @@ body {
 
 .chevron {
   position: absolute;
-  width: 2.1rem;
-  height: 0.48rem;
+  width: 2.5rem;
+  height: 0.6rem;
   opacity: 0;
   transform: scale(0.3);
   animation: move 3s ease-out infinite;
@@ -618,4 +609,8 @@ body {
 
 .cur-pointer {
   cursor: pointer;
+}
+
+.return-chart {
+  width: 80vw;
 }
