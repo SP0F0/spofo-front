@@ -126,10 +126,10 @@ const showTradeLogs = (stock: PortfolioStock) => {
   }
 };
 
-const dateFormat = (row,column) => {
-  var date = row[column.prop];
+const dateFormat = (row, column) => {
+  var date = row[column];
   return dayjs(date).format("YYYY-MM-DD");
-}
+} 
 
 </script>
 
