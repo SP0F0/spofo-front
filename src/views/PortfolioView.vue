@@ -9,6 +9,7 @@ import portfolioService from '@/components/services/portfolio-service';
 import { PortfolioSummary } from '@/components/models/portfolio-summary';
 import { PortfolioStock } from '@/components/models/portfolio-stock';
 import PortfolioTag from '@/components/common/PortfolioTag.vue';
+import dayjs from "dayjs";
 
 const route = useRoute();
 const router = useRouter();
