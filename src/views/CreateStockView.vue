@@ -198,9 +198,9 @@ const searchStocks = () => {
               <div class="button-container">
                 <el-row align="middle">
                   <el-col :span="24">
-                    <el-button color="#112D4E" round @click="clear"> 초기화 </el-button>
+                    <el-button color="#120064" round @click="clear"> 초기화 </el-button>
                     <el-button
-                      color="#112D4E"
+                      color="#120064"
                       round
                       @click="
                         createStock(goBack)
@@ -215,7 +215,7 @@ const searchStocks = () => {
                       저장
                     </el-button>
                     <el-button
-                      color="#112D4E"
+                      color="#120064"
                       round
                       @click="createStock(clear)"
                       :disabled="

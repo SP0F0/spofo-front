@@ -369,7 +369,7 @@ body {
   width: 90%;
   margin: 5rem auto;
   border-radius: 1rem;
-  background-color: #F9F7F7;
+  background-color: #E6F3F8;
 }
 
 .portfolios-summary-container .card-header,
@@ -413,8 +413,7 @@ body {
 
 .portfolios-summary-container .card-body .stock-card,
 .portfolio-summary-container .card-body .stock-card {
-  background-color: #DBE2EF;
-  border: 1px solid;
+  background-color: #C5D3E0;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   padding: 0.7rem;
@@ -497,8 +496,8 @@ body {
 
 .el-dialog,
 .el-message-box {
-  border-radius: 2rem !important;
-  background-color: #DBE2EF !important;
+  border-radius: 1rem !important;
+  background-color: #E6F3F8 !important;
 }
 
 .popup .el-input__wrapper,
@@ -580,7 +579,7 @@ body {
 
 .create-stock-container .card-body .stock-card {
   background-color: #DBE2EF;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 0.5rem;
   padding: 0.1rem;
 }

@@ -151,7 +151,7 @@ const changeFilterOption = () => {
                 </el-col>
                 <el-col :span="4">
                   <el-switch v-model="item.includeType" size="large"
-                    style="float: right; --el-switch-on-color: #112d4e; --el-switch-off-color: #3f72af"
+                    style="float: right; --el-switch-on-color: #120064; --el-switch-off-color: #0065B8"
                     @click="switchInclude(item)" />
                 </el-col>
               </el-row>
