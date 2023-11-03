@@ -144,7 +144,7 @@ const dateFormat = (row: { [x: string]: any; }, column: string | number) => {
               <el-col :span="1">
                 <div class="text item">
                   <el-dropdown trigger="click" size="large">
-                    <span class="el-dropdown-link">
+                    <span class="el-dropdown-link clickable">
                       <el-icon size="30" color="#000">
                         <Setting class="setting-icon"/>
                       </el-icon>
@@ -243,7 +243,7 @@ const dateFormat = (row: { [x: string]: any; }, column: string | number) => {
           </div>
           <div class="card-body" v-for="stock in portfolioStocks" :key="stock.id">
             <div class="stock-card">
-              <el-row class="stock-card-content" align="middle">
+              <el-row class="stock-card-content clickable" align="middle">
                 <el-col :span="4">
                   <el-avatar :size="60" :src="stock.imagePath as string" @click="showTradeLogs(stock as PortfolioStock)"/>
                 </el-col>

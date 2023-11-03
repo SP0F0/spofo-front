@@ -633,3 +633,7 @@ body {
 .el-message-box__btns button:nth-child(2):hover {
   background-color: #0065B8;
 }
+
+.clickable {
+  cursor: pointer;
+}
