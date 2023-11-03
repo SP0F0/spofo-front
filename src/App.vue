@@ -35,17 +35,22 @@ function showDropdown() {
         <img class="main-logo" src="./assets/images/logo.png" alt="로고 이미지" />
       </el-link>
     </el-col>
-    <el-col :span="3" class="header-content">
+    <el-col :span="2" class="header-content">
       <el-button class="nav-btn" size="large" @click="router.push({ name: 'portfolios' })" text>포트폴리오</el-button>
     </el-col>
-    <!-- 추후 상단바에 메뉴가 추가되면 넣을 위치 -->
-    <el-col :span="3" class="header-content"> 
+    <el-col :span="2" class="header-content"> 
       <el-button class="nav-btn" size="large" @click="router.push({ name: 'return' })" text>누적 수익률</el-button>
     </el-col>
-    <el-col :span="3" class="header-content"> </el-col>
-    <el-col :span="3" class="header-content"> </el-col>
-    <el-col :span="3" class="header-content"> </el-col>
-    <el-col :span="3" class="header-content"> </el-col>
+    
+    <!-- 추후 상단바에 메뉴가 추가되면 넣을 위치 -->
+    <el-col :span="2" class="header-content"> </el-col>
+    <el-col :span="2" class="header-content"> </el-col>
+    <el-col :span="2" class="header-content"> </el-col>
+    <el-col :span="2" class="header-content"> </el-col>
+    <el-col :span="2" class="header-content"> </el-col>
+    <el-col :span="2" class="header-content"> </el-col>
+    <el-col :span="2" class="header-content"> </el-col>
+    
     <el-col class="header-content" :span="3" v-if="useLoginStore.isAuthedMember">
       <el-dropdown ref="memberDropdown" trigger="contextmenu" size="large">
         <span class="el-dropdown-link">
