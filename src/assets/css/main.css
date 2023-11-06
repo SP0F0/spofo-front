@@ -306,6 +306,7 @@ body {
 .login .button-container {
   width: 30rem;
   margin: auto;
+  margin-top: 7rem;
 }
 
 .login .button-container img {
@@ -321,6 +322,10 @@ body {
   height: 4rem !important;
   font-size: 1.5rem !important;
   margin-bottom: 2rem;
+}
+
+.login .login-copyright {
+  margin: 2.5rem;
 }
 
 .portfolio-create-selection .button-container {
@@ -411,6 +416,7 @@ body {
 }
 
 .portfolios-summary-container .card-body .stock-card .el-link__inner {
+  color: #120064;
   font-size: 1.5rem;
 }
 
@@ -592,7 +598,10 @@ body {
 }
 
 .p-1 {
-  padding: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 2.5rem;
 }
 
 .color-black {
@@ -613,4 +622,14 @@ body {
 
 .return-chart {
   width: 80vw;
+}
+
+.el-message-box__btns button:nth-child(2) {
+  margin-left: 10px;
+  background-color: #120064;
+  border-color: #0065B8;
+}
+
+.el-message-box__btns button:nth-child(2):hover {
+  background-color: #0065B8;
 }
