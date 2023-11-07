@@ -51,7 +51,7 @@ const router = createRouter({
       },
       beforeEnter: (to, from, next) => {
         portfolioService
-          .getPortfolioSimples()
+          .getPortfolioSimples({})
           .then((response) => {
             if (response.data.length == 0) {
               // 포트폴리오 없는 경우 포폴 만들기 화면으로 보내기
