@@ -8,12 +8,13 @@ import type { TradeLog } from '@/components/models/trade-log';
 class PortfolioService {
   portfolioServer = import.meta.env.VITE_PORTFOLIO_SERVER;
 
-  getPortfoliosTotal() {
-    return axios.get(this.portfolioServer + '/portfolios/total');
+  getPortfoliosTotal(condition: any) {
+    console.log(condition);
+    return axios.get(this.portfolioServer + '/portfolios/total', { params: condition });
   }
 
-  getPortfolioSimples() {
-    return axios.get(this.portfolioServer + '/portfolios');
+  getPortfolioSimples(condition: any) {
+    return axios.get(this.portfolioServer + '/portfolios', { params: condition });
   }
 
   getPortfolio(portfolioId: number) {
