@@ -111,14 +111,14 @@ const changeFilterOption = () => {
                 <span>{{ portfoliosSummary?.gainRate }}%</span>
               </el-col>
             </el-row>
-            <el-row>
+            <!-- <el-row>
               <el-col :span="12">
                 <span class="f-small">일간 수익률</span>
               </el-col>
               <el-col :span="12" class="f-small txt-right">
                 <span>{{ portfoliosSummary?.dailyGainRate }}%</span>
               </el-col>
-            </el-row>
+            </el-row> -->
           </div>
         </el-card>
       </el-col>
