@@ -131,6 +131,11 @@ const dateFormat = (row: { [x: string]: any; }, column: { property: string | num
   return dayjs(date).format("YYYY-MM-DD");
 }
 
+const moneyFormat = (row: { [x: string]: any; }, column: { property: string | number; }) => {
+  var money = row[column.property];
+  return money.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+}
+
 </script>
 
 <template>
@@ -291,10 +296,10 @@ const dateFormat = (row: { [x: string]: any; }, column: { property: string | num
                   <el-table stripe style="border-radius: 1rem; width: 100%" :data="stock.tradeLogs">
                     <el-table-column prop="tradeDate" label="날짜" :formatter="dateFormat" align="center" width="105" />
                     <el-table-column prop="type" label="종류" align="center" />
-                    <el-table-column prop="avgPrice" label="매매가" align="center" />
+                    <el-table-column prop="avgPrice" label="매매가" :formatter="moneyFormat" align="center" />
                     <el-table-column prop="quantity" label="수량" align="center" />
                     <el-table-column prop="gain" label="실현수익" align="center" />
-                    <el-table-column prop="totalPrice" label="금액" align="center" />
+                    <el-table-column prop="totalPrice" label="금액" :formatter="moneyFormat" align="center" />
                   </el-table>
                 </div>
               </el-collapse-transition>

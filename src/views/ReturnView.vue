@@ -26,7 +26,7 @@ const data = {
     datasets: [
         {
             data: [4, -5, 9, 14, 18, 11, 16, 5, 14, 9, 4, -2, 10],
-            label: "포트폴리오 1",
+            label: "포트폴리오",
             borderColor: "#120064",
             fill: false
         }
