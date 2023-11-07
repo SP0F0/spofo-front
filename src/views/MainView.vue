@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { loginStore } from '@/stores/login-store';
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const useLoginStore = loginStore();
 </script>
 
 <template>
@@ -13,7 +15,12 @@ const router = useRouter();
       <img src="../assets/images/logo.png" class="main-first-logo" />
       <el-row>
         <el-col>
-          <el-button class="login-btn" color="#120064" round @click="router.push({ name: 'login' })">
+          <!-- 로그인 시 포트폴리오로 가는 시작하기 -->
+          <el-button v-if="useLoginStore.isAuthedMember" class="login-btn" color="#120064" round @click="router.push({ name: 'portfolios' })">
+            시작하기
+          </el-button>
+          <!-- 로그아웃 시 로그인으로 가는 시작하기 -->
+          <el-button v-else class="login-btn" color="#120064" round @click="router.push({ name: 'login' })">
             시작하기
           </el-button>
         </el-col>
